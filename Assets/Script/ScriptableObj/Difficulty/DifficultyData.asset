@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e6f6324c1dc54410845f0272b368988, type: 3}
+  m_Name: DifficultyData
+  m_EditorClassIdentifier: 
+  DifficultyList:
+  - _name: DifficultyLv1
+    _minCost: 50
+    _maxCost: 100
+  - _name: DifficultyLv2
+    _minCost: 100
+    _maxCost: 150
+  - _name: DifficultyLv3
+    _minCost: 150
+    _maxCost: 200

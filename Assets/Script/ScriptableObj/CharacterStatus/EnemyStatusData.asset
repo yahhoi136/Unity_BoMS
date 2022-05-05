@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8fde059afb045b383af5f48877f363, type: 3}
+  m_Name: EnemyStatusData
+  m_EditorClassIdentifier: 
+  CharacterStatusList:
+  - _name: Slime
+    _mySide: Enemy
+    _cost: 10
+    _hp: 100
+    _atk: 5
+    _atkRange: 2.4
+    _atkRate: 0.6
+    _spd: 3
+    _gravity: 30
+    _prefab: {fileID: 5619611942242057175, guid: f8f1dce033aa048db838941bf2d244fc, type: 3}
+    _playerSprite: {fileID: 0}
+    _playerLevelingData: {fileID: 0}
+  - _name: ShellSlime
+    _mySide: Enemy
+    _cost: 20
+    _hp: 130
+    _atk: 10
+    _atkRange: 2.43
+    _atkRate: 0.6
+    _spd: 2
+    _gravity: 30
+    _prefab: {fileID: 2825804701835041037, guid: 1331ee6e33ac24e44ba00269ca65a9a2, type: 3}
+    _playerSprite: {fileID: 0}
+    _playerLevelingData: {fileID: 0}

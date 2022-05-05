@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec8fde059afb045b383af5f48877f363, type: 3}
+  m_Name: HomeStatusData
+  m_EditorClassIdentifier: 
+  CharacterStatusList:
+  - _name: HumanKnight
+    _mySide: Home
+    _cost: 10
+    _hp: 100
+    _atk: 7
+    _atkRange: 2
+    _atkRate: 0.8
+    _spd: 5
+    _gravity: 30
+    _prefab: {fileID: 1185721472537623166, guid: 4d1aca1d57e6745ff83f9869501b05cc, type: 3}
+    _playerSprite: {fileID: 0}
+    _playerLevelingData: {fileID: 0}
+  - _name: ProtectedDude
+    _mySide: Home
+    _cost: 20
+    _hp: 180
+    _atk: 0
+    _atkRange: 2.5
+    _atkRate: 0
+    _spd: 3
+    _gravity: 30
+    _prefab: {fileID: 2354805300830874157, guid: 1e98254f12fc940b7bfe30cfe5293c9c, type: 3}
+    _playerSprite: {fileID: 0}
+    _playerLevelingData: {fileID: 0}
