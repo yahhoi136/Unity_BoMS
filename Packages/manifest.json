@@ -1,5 +1,9 @@
 {
   "dependencies": {
+      "jillejr.newtonsoft.json-for-unity": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.git#12.0.302",
+    
+    "jillejr.newtonsoft.json-for-unity.converters": "https://github.com/jilleJr/Newtonsoft.Json-for-Unity.Converters.git#1.4.0",
+    
     "com.unity.collab-proxy": "1.15.15",
     "com.unity.ide.rider": "3.0.13",
     "com.unity.ide.visualstudio": "2.0.14",
