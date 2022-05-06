@@ -37,14 +37,15 @@ public class BattleController : MonoBehaviour
         }
     }
 
-
+    // タイトルに戻る。DontDestroyOnloadを解除。
     public void moveToTitleScene()
     {
+        SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene()); 
         SceneManager.LoadScene("TitleScene");
     }
 
 
-    // ここで前回セーブしたPreparationSceneをそのまま表示し直す。
+    // Retry。ここで前回セーブしたPreparationSceneをそのまま表示し直す。
     public void returnToPreparationScene()
     {
         SceneManager.LoadScene("PreparationScene");

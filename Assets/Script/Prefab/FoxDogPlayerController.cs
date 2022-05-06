@@ -49,6 +49,9 @@ public class FoxDogPlayerController : MonoBehaviour, ICharacter, IAttackable
 
 	void Start()
     {
+		// TitleSceneでは何もしない。
+		if (SceneManager.GetActiveScene().name == "TitleScene") return;
+
 		// prefabに参照させる
 		playerPreparation = GameObject.FindGameObjectWithTag("PlayerPreparation").GetComponent<PlayerPreparation>();
 		gravity = characterStatusData.CharacterStatusList[0].Gravity;
@@ -57,6 +60,9 @@ public class FoxDogPlayerController : MonoBehaviour, ICharacter, IAttackable
 
 	void Update()
 	{
+		// TitleSceneでは何もしない。
+		if (SceneManager.GetActiveScene().name == "TitleScene") return;
+
 		// PreparationSceneでは素振りのみ可能。
 		if (SceneManager.GetActiveScene().name == "PreparationScene")
 		{

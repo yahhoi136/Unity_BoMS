@@ -46,6 +46,9 @@ public class SlimeController : MonoBehaviour, ICharacter, IAttackable
 
     void Update()
     {
+        // TitleSceneでは何も出来ない。
+        if (SceneManager.GetActiveScene().name == "TitleScene") return;
+
         // PreparationSceneでは動かさない
         if (SceneManager.GetActiveScene().name == "PreparationScene")
         {
