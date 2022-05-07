@@ -37,7 +37,7 @@ public class EnemySpawnController: MonoBehaviour
     [SerializeField] SpawnPointData spawnPointData;
     [SerializeField] DifficultyData difficultyData;
 
-    [SerializeField] DataForRetry dataForRetry;
+    [SerializeField, NotEditable] DataForRetry dataForRetry;
     List<CharacterStatus> enemyList;
     List<Vector3> pointList;
 

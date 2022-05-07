@@ -18,7 +18,7 @@ public class HumanKnightController : MonoBehaviour, ICharacter, IAttackable
     BattleController battleController;
 
 
-    float hp, spd;
+    [SerializeField,NotEditable] float hp, spd;
     CharacterStatus myStatus;
     GameObject[] targetCharacters;
     GameObject closestTarget;

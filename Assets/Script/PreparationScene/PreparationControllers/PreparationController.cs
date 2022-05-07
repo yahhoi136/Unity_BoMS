@@ -7,9 +7,8 @@ using UnityEngine.SceneManagement;
 public class PreparationController : MonoBehaviour
 {
 
-    [SerializeField] GameObject go;
-
-    [SerializeField] bool _isRetried;
+    [SerializeField, NotEditable] GameObject go;
+    bool _isRetried;
     public bool IsRetried { get { return _isRetried; } set { _isRetried = value; } }
 
     void Start()

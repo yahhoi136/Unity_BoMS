@@ -8,10 +8,9 @@ public class DataForRetry : MonoBehaviour
 {
 
     #region 変数とプロパティ
-    // 値確認用SerializeField、後で消す。
-    [SerializeField] public List<CharacterStatus> _enemyListForRe;
-    [SerializeField] public List<Vector3> _pointListForRe;
-    [SerializeField] public List<int> _numOfSpawnForRe;
+    [SerializeField,NotEditable] public List<CharacterStatus> _enemyListForRe;
+    [SerializeField,NotEditable] public List<Vector3> _pointListForRe;
+    [SerializeField,NotEditable] public List<int> _numOfSpawnForRe;
 
     public List<CharacterStatus> EnemyListForRe { get { return _enemyListForRe; } set { _enemyListForRe = value; } }
     public List<Vector3> PointListForRe { get { return _pointListForRe; } set { _pointListForRe = value; } }

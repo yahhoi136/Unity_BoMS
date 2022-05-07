@@ -32,12 +32,11 @@ public class PlayerPreparation : MonoBehaviour
     #region 変数とプロパティ
     [SerializeField] CharacterStatusData playerStatusData;
 
-    // 値確認用SerializeField、後で消す。
-    [SerializeField] PlayerLevelingData _playerLevelingData;
-    [SerializeField] CharacterStatus _myStatus;
-    [SerializeField] int _homeCostLimit, _totalHomeCost, _playerNum, _hpLv, _atkLv, _spdLv, _atkRateLv;
-    [SerializeField] float _playerHp, _playerAtk, _playerAtkRate, _playerSpd;
-
+    // 数値確認
+    [SerializeField, NotEditable] PlayerLevelingData _playerLevelingData;
+    [SerializeField, NotEditable] CharacterStatus _myStatus;
+    [SerializeField, NotEditable] int _homeCostLimit, _totalHomeCost, _playerNum, _hpLv, _atkLv, _spdLv, _atkRateLv;
+    [SerializeField, NotEditable] float _playerHp, _playerAtk, _playerAtkRate, _playerSpd;
 
     public PlayerLevelingData PlayerLevelingData { get{ return _playerLevelingData; } set { _playerLevelingData = value; } }
     public CharacterStatus MyStatus { get{ return _myStatus; } set { _myStatus = value; } }

@@ -13,12 +13,33 @@ MonoBehaviour:
   m_Name: DifficultyData
   m_EditorClassIdentifier: 
   DifficultyList:
-  - _name: DifficultyLv1
+  - _rank: D
+    _numOfPhase: 3
+    _minRank: 1
+    _maxRank: 1
     _minCost: 50
     _maxCost: 100
-  - _name: DifficultyLv2
+  - _rank: C
+    _numOfPhase: 4
+    _minRank: 1
+    _maxRank: 2
     _minCost: 100
     _maxCost: 150
-  - _name: DifficultyLv3
+  - _rank: B
+    _numOfPhase: 5
+    _minRank: 2
+    _maxRank: 2
     _minCost: 150
     _maxCost: 200
+  - _rank: A
+    _numOfPhase: 5
+    _minRank: 1
+    _maxRank: 3
+    _minCost: 200
+    _maxCost: 250
+  - _rank: S
+    _numOfPhase: 5
+    _minRank: 2
+    _maxRank: 3
+    _minCost: 250
+    _maxCost: 300

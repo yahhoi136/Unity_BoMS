@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
-#region 説明
+#region プレイヤー説明
 /*///
 
 ・ターゲット管理
@@ -33,10 +33,10 @@ public class FoxDogPlayerController : MonoBehaviour, ICharacter, IAttackable
 	[SerializeField] MeshCollider myWeaponMc;
 	[SerializeField] DamageController damageController;
 
-	[SerializeField] PlayerPreparation playerPreparation; // 確認用serializedField後で消す。
+	[SerializeField,NotEditable] PlayerPreparation playerPreparation;
+	[SerializeField, NotEditable] float hp, spd, gravity;
 	BattleController battleController;
 	GameObject[] targetCharacters;
-	[SerializeField] float hp, spd, gravity; // 確認用serializedField後で消す。
 	bool gottenBC = false;
 
 	int speedParamHash = Animator.StringToHash("Speed");

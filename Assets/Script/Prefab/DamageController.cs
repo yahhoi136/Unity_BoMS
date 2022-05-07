@@ -5,12 +5,12 @@ using UnityEngine;
 public class DamageController: MonoBehaviour
 {
     // 自分のweaponに渡す用のatk。
-    public float atk;
+    [NotEditable] public float atk;
 
     // 以下被ダメ処理用。
     float hp;
-    public float damage;
-    public bool isTakeDamage = false;
+    [NotEditable] public float damage;
+    [NotEditable] public bool isTakeDamage = false;
 
     public void takeDamage()
     {

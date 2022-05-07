@@ -9,7 +9,7 @@ public class Weapon : MonoBehaviour
 {
     [SerializeField] DamageController myDamageController;
 
-    public float atk;
+    [NotEditable] public float atk;
     string mySide;
     string opponentSide;
 

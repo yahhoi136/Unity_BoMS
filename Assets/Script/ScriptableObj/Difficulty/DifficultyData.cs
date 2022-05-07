@@ -22,11 +22,14 @@ public class DifficultyData : ScriptableObject
 public class Difficulty
 {
     // 一番上のstringはリストの名前になるので常に設定。 
-    [SerializeField] private string _name;
-    [SerializeField] private int _minCost, _maxCost;
+    [SerializeField] private string _rank;
+    [SerializeField] private int _numOfPhase, _minRank, _maxRank, _minCost, _maxCost;
 
     // 敵の総コストはMinCost〜MaxCostの間。
-    public string Name { get { return _name; } }
+    public string Rank { get { return _rank; } }
+    public int NumOfPhase { get { return _numOfPhase; } }
+    public int MinRank { get{ return _minRank; } }
+    public int MaxRank { get { return _maxRank; } }
     public int MinCost { get{ return _minCost; } }
     public int MaxCost { get{ return _maxCost; } }
 }

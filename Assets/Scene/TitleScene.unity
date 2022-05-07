@@ -289,7 +289,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 293153346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 616296738}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: yesButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &293153346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,8 +562,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u6700\u9AD8\u5230\u9054\u30EC\u30D9\u30EB\u3000Lv. 5\n\n \u56F3\u9451\u5B8C\u6210\u7387      
-    1 0 0\uFF05"
+  m_Text: "\u6700\u9AD8\u5230\u9054\u30E9\u30F3\u30AF\u3000A\n\n \u56F3\u9451\u5B8C\u6210\u7387       
+    100 %"
 --- !u!222 &597102751
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -589,7 +601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9500bfc91f243189fd392d9c742a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  difficultyData: {fileID: 11400000, guid: 308c1080e3dea4d56b5225579c56e7f3, type: 2}
   saveData: {fileID: 680464989}
+  dataText: {fileID: 597102750}
+  explanation: {fileID: 1019578279}
 --- !u!4 &616296739
 Transform:
   m_ObjectHideFlags: 0
@@ -1018,7 +1033,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 763410449}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 616296738}
+        m_TargetAssemblyTypeName: TitleController, Assembly-CSharp
+        m_MethodName: backToTitle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &763410449
 MonoBehaviour:
   m_ObjectHideFlags: 0
