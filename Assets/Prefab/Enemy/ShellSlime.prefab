@@ -737,6 +737,7 @@ GameObject:
   - component: {fileID: 2825804701835041034}
   - component: {fileID: 7666150434173161161}
   - component: {fileID: -8353312139274494184}
+  - component: {fileID: -4502857506949827319}
   - component: {fileID: -3585935230493241318}
   m_Layer: 0
   m_Name: ShellSlime
@@ -813,7 +814,11 @@ MonoBehaviour:
   myWeaponMc: {fileID: 3775012167891488130}
   characterStatusData: {fileID: 11400000, guid: 6190f22539a6a42bf9dd862cf349e285, type: 2}
   whoisClosestTarget: {fileID: -8353312139274494184}
+  statusController: {fileID: -4502857506949827319}
   damageController: {fileID: -3585935230493241318}
+  dataName: 
+  hp: 0
+  spd: 0
 --- !u!114 &-8353312139274494184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,6 +829,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e58213541560d432bacb87464003f017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4502857506949827319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2825804701835041037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d774d84a007a46d1809461efd2cf454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-3585935230493241318

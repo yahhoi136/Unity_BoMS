@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#region 説明
+#region PreparatioinControllers説明
 /*///
 
 ・リトライ用のデータ管理
@@ -12,13 +12,14 @@ using UnityEngine;
  「①Difficulty設定→　②EnemyCostLimit設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
  ①〜③はEnemySpawnControllerで管理。④は各ボタンで管理。全てのHomeCostLimit,TotalHomeCostの呼び出し元はPlayerPreparationになっている。
 
-・プレイヤーステータス管理
- プレイヤーステータス管理は「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→
+・PreparationSceneでのプレイヤーステータス管理
+ PreparationSceneでのプレイヤーステータス管理は「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→
  ④各Up/Downボタンタップ時にステータス変動」の順に行われる。①〜③はPlayerChangeボタンで管理。④は各種ボタンで管理している。
- 全てのPlayerNum,MyStatus,PlayerLevelingData,各Playerステータスの呼び出し元はPlayerPreparationになっている。
+ 全てのPlayerNum,MyStatus,PlayerLevelingData,Preparationでの各Playerステータス,の呼び出し元はPlayerPreparationになっている。
 
 ・キャラ配置管理
-「」の順に行われる。
+「①新規キャラの配置/配置取り消し→　②既存キャラの移動/削除」の順に行われる。
+ ①は各AllocationボタンとAllocationDeleteによって管理されており、②はAllocationControllerによって管理されている。
 
 ・読み込み優先
  ScriptExcutionOrderで読み込みを、PreparationController →　EnemySpawnController →　PlayerPreparation or AllocationControllerの順で優先

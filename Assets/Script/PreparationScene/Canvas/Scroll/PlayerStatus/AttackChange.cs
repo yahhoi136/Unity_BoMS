@@ -17,16 +17,13 @@ public class AttackChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     private void Start()
     {
-        // retry用にコピーされた時は、Startの重複を避ける
-        if (!GameObject.FindGameObjectWithTag("CopyForRetry"))
-        {
-            // Attackのレベリングデータ
-            myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[1];
+        // Attackのレベリングデータ
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[1];
 
-            // AttackUpボタン初期デザイン
-            incrementText.text = $"ATK {playerPreparation.PlayerAtk} → {playerPreparation.PlayerAtk + myLeveling.Incre[0]}";
-            costText.text = $"COST {myLeveling.Cost[0]} ";
-        }
+        // AttackUpボタン初期デザイン
+        incrementText.text = $"ATK {playerPreparation.PlayerAtk} → {playerPreparation.PlayerAtk + myLeveling.Incre[0]}";
+        costText.text = $"COST {myLeveling.Cost[0]} ";
+        
     }
 
 

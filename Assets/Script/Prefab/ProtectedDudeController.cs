@@ -11,15 +11,14 @@ public class ProtectedDudeController : MonoBehaviour, ICharacter
     // インスペクタで接続
     [SerializeField] Animator animator;
     [SerializeField] Rigidbody rb;
+    [SerializeField] MeshCollider myWeaponMc;
     [SerializeField] CharacterStatusData characterStatusData;
     // 他で実装
     [SerializeField] WhoisClosestTarget whoisClosestTarget;
+    [SerializeField] StatusController statusController;
     [SerializeField] DamageController damageController;
 
     BattleController battleController;
-
-
-    [SerializeField, NotEditable] float hp, spd;
     CharacterStatus myStatus;
     GameObject[] targetCharacters;
     GameObject closestTarget;
@@ -29,21 +28,19 @@ public class ProtectedDudeController : MonoBehaviour, ICharacter
     int dieParamHash = Animator.StringToHash("IsDead");
 
 
-
     void Start()
     {
-        // ステータス設定
+        // 各初期ステータスを現在のステータスに代入
         myStatus = characterStatusData.CharacterStatusList[1];
-        hp = myStatus.Hp;
-        spd = myStatus.Spd;
+        statusController.dataName = myStatus.Name;
+        statusController.cost = myStatus.Cost;
+        statusController.hp = myStatus.Hp;
+        statusController.spd = myStatus.Spd;
     }
 
 
     void Update()
     {
-        // TitleSceneでは何も出来ない。
-        if (SceneManager.GetActiveScene().name == "TitleScene") return;
-
         // PreparationSceneでは動かさない
         if (SceneManager.GetActiveScene().name == "PreparationScene")
         {
@@ -58,7 +55,6 @@ public class ProtectedDudeController : MonoBehaviour, ICharacter
             SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
             gottenBC = true;
         }
-
 
         targetCharacters = myStatus.MySide == "Enemy" ? battleController.Homes : battleController.Enemies;
 
@@ -81,15 +77,15 @@ public class ProtectedDudeController : MonoBehaviour, ICharacter
     }
 
 
- ///// 移動処理
- ///
+    ///// 移動処理
+    ///
     public void Move()
     {
         // 最短距離にある相手陣営オブジェクトに攻撃範囲まで接近
         if (myStatus.AtkRange < distance)
         {
             transform.LookAt(closestTarget.transform.position);
-            rb.velocity = new Vector3(0, -myStatus.Gravity, spd);
+            rb.velocity = new Vector3(0, -myStatus.Gravity, statusController.spd);
             rb.velocity = transform.TransformDirection(rb.velocity);
             animator.SetBool(moveParamHash, true);
         }
@@ -102,17 +98,17 @@ public class ProtectedDudeController : MonoBehaviour, ICharacter
     }
 
 
- ///// Hp管理
- /// 
+    ///// Hp管理
+    /// 
     public void ReLoadHp()
     {
         // 被ダメ処理与ダメ処理は各Weaponオブジェクトに
         if (damageController.isTakeDamage)
         {
-            hp = damageController.hpDecrease(hp);
+            statusController.hp = damageController.hpDecrease(statusController.hp);
             damageController.isTakeDamage = false;
 
-            if (hp <= 0)  // 死亡時
+            if (statusController.hp <= 0)  // 死亡時
             {
                 animator.SetTrigger(dieParamHash);
                 this.enabled = false;

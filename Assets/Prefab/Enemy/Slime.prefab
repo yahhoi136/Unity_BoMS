@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 373316538298260926}
   - component: {fileID: 373316538298260913}
   m_Layer: 0
-  m_Name: Weapon:ShellSlimeBody
+  m_Name: Weapon:SlimeBody
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 5619611942242057174}
   - component: {fileID: 5619611942242057193}
   - component: {fileID: 3430032831189421601}
+  - component: {fileID: -956540284877811625}
   - component: {fileID: -4180692667850969583}
   m_Layer: 0
   m_Name: Slime
@@ -291,7 +292,11 @@ MonoBehaviour:
   myWeaponMc: {fileID: 373316538298260926}
   characterStatusData: {fileID: 11400000, guid: 6190f22539a6a42bf9dd862cf349e285, type: 2}
   whoisClosestTarget: {fileID: 3430032831189421601}
+  statusController: {fileID: -956540284877811625}
   damageController: {fileID: -4180692667850969583}
+  dataName: 
+  hp: 0
+  spd: 0
 --- !u!114 &3430032831189421601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -302,6 +307,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e58213541560d432bacb87464003f017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-956540284877811625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5619611942242057175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d774d84a007a46d1809461efd2cf454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &-4180692667850969583

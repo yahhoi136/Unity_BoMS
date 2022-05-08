@@ -25,12 +25,8 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        // PreparationSceneでatkを設定
-        if (SceneManager.GetActiveScene().name == "PreparationScene")
-        {
-            // ステータスの代入
-            atk = myDamageController.atk;
-        }
+        // キャラの攻撃力から武器の攻撃力を設定
+        atk = myDamageController.atk;
     }
 
 

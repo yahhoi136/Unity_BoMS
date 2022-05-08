@@ -17,29 +17,29 @@ MonoBehaviour:
     _numOfPhase: 3
     _minRank: 1
     _maxRank: 1
-    _minCost: 50
-    _maxCost: 100
+    _minCost: 0
+    _maxCost: 50
   - _rank: C
     _numOfPhase: 4
     _minRank: 1
     _maxRank: 2
-    _minCost: 100
-    _maxCost: 150
+    _minCost: 50
+    _maxCost: 100
   - _rank: B
     _numOfPhase: 5
     _minRank: 2
     _maxRank: 2
-    _minCost: 150
-    _maxCost: 200
+    _minCost: 100
+    _maxCost: 150
   - _rank: A
     _numOfPhase: 5
     _minRank: 1
     _maxRank: 3
-    _minCost: 200
-    _maxCost: 250
+    _minCost: 150
+    _maxCost: 200
   - _rank: S
     _numOfPhase: 5
     _minRank: 2
     _maxRank: 3
-    _minCost: 250
-    _maxCost: 300
+    _minCost: 200
+    _maxCost: 250

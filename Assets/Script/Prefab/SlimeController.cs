@@ -15,12 +15,10 @@ public class SlimeController : MonoBehaviour, ICharacter, IAttackable
     [SerializeField] CharacterStatusData characterStatusData;
     // 他で実装
     [SerializeField] WhoisClosestTarget whoisClosestTarget;
+    [SerializeField] StatusController statusController;
     [SerializeField] DamageController damageController;
 
     BattleController battleController;
-
-
-    [SerializeField, NotEditable] float hp, spd;
     CharacterStatus myStatus;
     GameObject[] targetCharacters;
     GameObject closestTarget;
@@ -33,22 +31,23 @@ public class SlimeController : MonoBehaviour, ICharacter, IAttackable
     int baseAttackParamHash = Animator.StringToHash("Base Layer.Attack");
 
 
+
     void Start()
     {
-        // ステータス設定
+        // 各初期ステータスを現在のステータスに代入
         myStatus = characterStatusData.CharacterStatusList[0];
-        hp = myStatus.Hp;
-        damageController.atk = myStatus.Atk;
-        spd = myStatus.Spd;
-        animator.SetFloat(atkRateParamHash, myStatus.AtkRate);
+        statusController.dataName = myStatus.Name;
+        statusController.cost = myStatus.Cost;
+        statusController.hp = myStatus.Hp;
+        statusController.atk = myStatus.Atk;
+        statusController.atkRate = myStatus.AtkRate;
+        statusController.spd = myStatus.Spd;
+
     }
 
 
     void Update()
     {
-        // TitleSceneでは何も出来ない。
-        if (SceneManager.GetActiveScene().name == "TitleScene") return;
-
         // PreparationSceneでは動かさない
         if (SceneManager.GetActiveScene().name == "PreparationScene")
         {
@@ -87,15 +86,15 @@ public class SlimeController : MonoBehaviour, ICharacter, IAttackable
     }
 
 
- ///// 移動処理
- ///
+    ///// 移動処理
+    ///
     public void Move()
     {
         // 最短距離にある相手陣営オブジェクトに攻撃範囲まで接近
         if (myStatus.AtkRange < distance)
         {
             transform.LookAt(closestTarget.transform.position);
-            rb.velocity = new Vector3(0,  -myStatus.Gravity, spd);
+            rb.velocity = new Vector3(0, -myStatus.Gravity, statusController.spd);
             rb.velocity = transform.TransformDirection(rb.velocity);
             animator.SetBool(moveParamHash, true);
         }
@@ -108,10 +107,13 @@ public class SlimeController : MonoBehaviour, ICharacter, IAttackable
     }
 
 
- ///// 攻撃処理
- /// 
+    ///// 攻撃処理
+    /// 
     public void Attack()
     {
+        damageController.atk = statusController.atk;
+        animator.SetFloat(atkRateParamHash, statusController.atkRate);
+
         AnimatorStateInfo state;
 
         // 最短距離にある相手陣営オブジェクトが攻撃範囲内だと攻撃アクション行う
@@ -123,17 +125,17 @@ public class SlimeController : MonoBehaviour, ICharacter, IAttackable
     }
 
 
- ///// Hp管理
- /// 
+    ///// Hp管理
+    /// 
     public void ReLoadHp()
     {
         // 被ダメ処理与ダメ処理は各Weaponオブジェクトに
         if (damageController.isTakeDamage)
         {
-            hp = damageController.hpDecrease(hp);
+            statusController.hp = damageController.hpDecrease(statusController.hp);
             damageController.isTakeDamage = false;
 
-            if (hp <= 0)  // 死亡時
+            if (statusController.hp <= 0)  // 死亡時
             {
                 animator.SetTrigger(dieParamHash);
                 myWeaponMc.enabled = false;  // これないと死亡アニメーション中に攻撃してくる

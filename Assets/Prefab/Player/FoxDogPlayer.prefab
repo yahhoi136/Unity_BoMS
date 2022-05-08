@@ -1223,6 +1223,7 @@ GameObject:
   - component: {fileID: 3212019258762855962}
   - component: {fileID: 1376410882862948229}
   - component: {fileID: 3212019258762855963}
+  - component: {fileID: -1352724216551635097}
   - component: {fileID: 8752657452094300402}
   m_Layer: 8
   m_Name: FoxDogPlayer
@@ -1316,10 +1317,24 @@ MonoBehaviour:
   animator: {fileID: 3475781853391670966}
   character: {fileID: 3212019258762855962}
   myWeaponMc: {fileID: 1893469302847588501}
+  statusController: {fileID: -1352724216551635097}
   damageController: {fileID: 8752657452094300402}
+  playerPreparation: {fileID: 0}
   hp: 0
   spd: 0
   gravity: 0
+--- !u!114 &-1352724216551635097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475781853401169162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d774d84a007a46d1809461efd2cf454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8752657452094300402
 MonoBehaviour:
   m_ObjectHideFlags: 0

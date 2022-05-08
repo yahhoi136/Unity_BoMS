@@ -11,7 +11,12 @@ public class PlayerChange : MonoBehaviour, IPointerDownHandler
     [SerializeField] PlayerPreparation playerPreparation;
     [SerializeField] Image playerImage;
     [SerializeField] Text playerName;
- 
+
+
+    private void Start()
+    {
+        // tag で"Retried"で　リトライ時か判断する?正直他のパラメは初期値に戻してる。リセットしたい時とかにそっちの方が手っ取り早そうだから。配置キャラ一々AllocationDeleteまで持っていかないと行けないしね。
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {

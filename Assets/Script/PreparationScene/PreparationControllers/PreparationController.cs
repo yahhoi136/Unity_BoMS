@@ -4,6 +4,32 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#region PreparatioinControllers説明
+/*///
+
+・リトライ用のデータ管理
+ 初挑戦時とリトライ時での動作を変える。リトライ時か否か(isRetried)はPreparationController、リトライ用のデータはDataForRetryが全ての呼び出し元になっている。
+
+・コスト管理
+ 「①Difficulty設定→　②EnemyCostLimit設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
+ ①〜③はEnemySpawnControllerで管理。④は各ボタンで管理。全てのHomeCostLimit,TotalHomeCostの呼び出し元はPlayerPreparationになっている。
+
+・プレイヤーステータス管理
+ プレイヤーステータス管理は「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→
+ ④各Up/Downボタンタップ時にステータス変動」の順に行われる。①〜③はPlayerChangeボタンで管理。④は各種ボタンで管理している。
+ 全てのPlayerNum,MyStatus,PlayerLevelingData,各Playerステータスの呼び出し元はPlayerPreparationになっている。
+
+・キャラ配置管理
+「①新規キャラの配置/配置取り消し→　②既配置キャラの移動/削除」の順に行われる。
+ ①は各AllocationボタンとAllocationDelete、②はAllocationControllerとAllocationDeleteにによって管理されている。
+
+・読み込み優先
+ ScriptExcutionOrderで読み込みを、PreparationController →　EnemySpawnController →　PlayerPreparation or AllocationControllerの順で優先
+
+/*///
+#endregion
+
+
 public class PreparationController : MonoBehaviour
 {
 
@@ -14,7 +40,7 @@ public class PreparationController : MonoBehaviour
     void Start()
     {
         // Retry用にDataForRetryオブジェクトにデータを保存。
-        if (!GameObject.Find("DataForRetry"))
+        if (!GameObject.FindGameObjectWithTag("Retried"))
         {
             go = new GameObject();
             go.name = "DataForRetry";
@@ -25,7 +51,7 @@ public class PreparationController : MonoBehaviour
         }
         else
         {
-            go = GameObject.Find("DataForRetry");
+            go = GameObject.FindGameObjectWithTag("Retried");
             IsRetried = true;
         }
     }

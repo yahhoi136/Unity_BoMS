@@ -17,16 +17,13 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     private void Start()
     {
-        // retry用にコピーされた時は、Startの重複を避ける
-        if (!GameObject.FindGameObjectWithTag("CopyForRetry"))
-        {
-            // AttackRateのレベリングデータ
-            myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[3];
+        // AttackRateのレベリングデータ
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[3];
 
-            // AttackRateUpボタン初期デザイン
-            incrementText.text = $"{playerPreparation.PlayerAtkRate}/s → {playerPreparation.PlayerAtkRate + myLeveling.Incre[0]}/s";
-            costText.text = $"COST {myLeveling.Cost[0]} ";
-        }
+        // AttackRateUpボタン初期デザイン
+        incrementText.text = $"{playerPreparation.PlayerAtkRate}/s → {playerPreparation.PlayerAtkRate + myLeveling.Incre[0]}/s";
+        costText.text = $"COST {myLeveling.Cost[0]} ";
+
     }
 
 

@@ -55,13 +55,12 @@ public class BattleController : MonoBehaviour
         else if (Enemies.Length == 0 && onceDone == false)
         {
             WinUI.SetActive(true);
-            calculateRank();
         }
     }
 
 
     // 連勝数 - 各Difficultyのphase数 でランクを計算。
-    public void calculateRank()
+    void calculateRank()
     {
         // 連勝数＋１
         data.WinningStreak += 1;
@@ -82,24 +81,27 @@ public class BattleController : MonoBehaviour
     }
 
 
+    // Retry。Retryすると連勝数加算されない。ここで前回セーブしたPreparationSceneをそのまま表示し直す。
+    public void returnToPreparationScene()
+    {
+        GameObject.Find("DataForRetry").tag = "Retried";
+        SceneManager.LoadScene("PreparationScene");
+    }
+
 
     // Title。DontDestroyOnloadを解除。
     public void moveToTitleScene()
     {
+        calculateRank();
         SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene()); 
         SceneManager.LoadScene("TitleScene");
     }
 
 
-    // Retry。ここで前回セーブしたPreparationSceneをそのまま表示し直す。
-    public void returnToPreparationScene()
-    {
-        SceneManager.LoadScene("PreparationScene");
-    }
-
     // Next。DontDestroyOnloadを解除
     public void nextToPreparationScene()
     {
+        calculateRank();
         SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene());
         SceneManager.LoadScene("PreparationScene");
     }

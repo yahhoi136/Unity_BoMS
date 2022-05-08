@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
 
     [SerializeField] PlayerPreparation playerPreparation;
@@ -17,20 +17,17 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void Start()
     {
-        // retry用にコピーされた時は、Startの重複を避ける
-        if (!GameObject.FindGameObjectWithTag("CopyForRetry"))
-        {
-            // Speedのレベリングデータ
-            myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[2];
 
-            // SpeedUpボタン初期デザイン
-            incrementText.text = $"{playerPreparation.PlayerSpd}m/s → {playerPreparation.PlayerSpd + myLeveling.Incre[0]}m/s";
-            costText.text = $"COST {myLeveling.Cost[0]} ";
-        }
+        // Hpのレベリングデータ
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[0];
+
+        // HpUpボタン初期デザイン
+        incrementText.text = $"HP{playerPreparation.PlayerHp} → {playerPreparation.PlayerHp + myLeveling.Incre[0]} ";
+        costText.text = $"COST {myLeveling.Cost[0]} ";
     }
 
 
- ///// SpeedUpボタンの上にカーソルが来た時
+ ///// HpUpボタンの上にカーソルが来た時
  ///
     #region 説明
     // Upボタンに触れた時だけ、そのDownボタンが表示される。DownボタンはUpボタンの子オブジェなのでDownに触れてる時も表示される。
@@ -54,32 +51,32 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
- ///// SpeedUpボタンが押されたとき
+ ///// HpUpボタンが押されたとき
  ///
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (playerPreparation.SpdLv < myLeveling.MaxLv)
+        if (playerPreparation.HpLv < myLeveling.MaxLv)
         {
-            // レベル間Spd増分を加えて、レベル間必要コストをTotalHomeCostに足している
+            // レベル間Hp増分を加えて、レベル間必要コストをTotalHomeCostに足している
             for (int i = 0; i < myLeveling.MaxLv; i++)
             {
-                if (playerPreparation.SpdLv == i + 1)
+                if(playerPreparation.HpLv == i+1)
                 {
-                    playerPreparation.PlayerSpd += myLeveling.Incre[i];
+                    playerPreparation.PlayerHp += myLeveling.Incre[i];
                     playerPreparation.TotalHomeCost += myLeveling.Cost[i];
 
-                    if (myLeveling.MaxLv == i + 2)
+                    if (myLeveling.MaxLv == i+2)
                     {
-                        incrementText.text = $" {playerPreparation.PlayerSpd}m/s Max！";
+                        incrementText.text = $"HP{playerPreparation.PlayerHp} Max！";
                         costText.text = "COST ー ";
                     }
                     else
                     {
-                        incrementText.text = $"{playerPreparation.PlayerSpd}m/s → {playerPreparation.PlayerSpd + myLeveling.Incre[i + 1]}m/s";
+                        incrementText.text = $"HP{playerPreparation.PlayerHp} → {playerPreparation.PlayerHp + myLeveling.Incre[i + 1]} ";
                         costText.text = $"COST {myLeveling.Cost[i + 1]} ";
                     }
 
-                    playerPreparation.SpdLv += 1;
+                    playerPreparation.HpLv += 1;
                     return;
                 }
             }
@@ -87,25 +84,25 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
- ///// SpdDownボタンが押されたとき
+ ///// HpDownボタンが押されたとき
  ///
-    public void Spddown()
+    public void Hpdown()
     {
-        if (playerPreparation.SpdLv > 1)
+        if (playerPreparation.HpLv > 1)
         {
 
-            // レベル間Spd増分を引いて、レベル間必要コストをTotalHomeCostから引いている
+            // レベル間Hp増分を引いて、レベル間必要コストをTotalHomeCostから引いている
             for (int i = 0; i < myLeveling.MaxLv; i++)
             {
-                if (playerPreparation.SpdLv == i + 2)
+                if (playerPreparation.HpLv == i+2)
                 {
-                    playerPreparation.PlayerSpd -= myLeveling.Incre[i];
+                    playerPreparation.PlayerHp -= myLeveling.Incre[i];
                     playerPreparation.TotalHomeCost -= myLeveling.Cost[i];
 
-                    incrementText.text = $"{playerPreparation.PlayerSpd}m/s → {playerPreparation.PlayerSpd + myLeveling.Incre[i]}m/s";
+                    incrementText.text = $"HP{playerPreparation.PlayerHp} → {playerPreparation.PlayerHp + myLeveling.Incre[i]} ";
                     costText.text = $"COST {myLeveling.Cost[i]} ";
 
-                    playerPreparation.SpdLv -= 1;
+                    playerPreparation.HpLv -= 1;
                 }
             }
         }

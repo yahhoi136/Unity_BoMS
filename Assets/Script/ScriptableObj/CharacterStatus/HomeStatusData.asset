@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterStatusList:
   - _name: HumanKnight
     _mySide: Home
+    _enemyRnak: 0
     _cost: 10
     _hp: 100
     _atk: 7
@@ -27,7 +28,8 @@ MonoBehaviour:
     _playerLevelingData: {fileID: 0}
   - _name: ProtectedDude
     _mySide: Home
-    _cost: 20
+    _enemyRnak: 0
+    _cost: 15
     _hp: 180
     _atk: 0
     _atkRange: 2.5
