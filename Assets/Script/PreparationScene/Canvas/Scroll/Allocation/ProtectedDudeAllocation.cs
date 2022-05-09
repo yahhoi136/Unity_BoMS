@@ -57,7 +57,7 @@ public class ProtectedDudeAllocation : MonoBehaviour, ISelectHandler, IDeselectH
                 isSelected = false;
                 isCreated = false;
                 allocationDelete.myButton.interactable = false;
-                playerPreparation.TotalHomeCost -= homeStatusData.CharacterStatusList[0].Cost;
+                playerPreparation.TotalHomeCost -= homeStatusData.CharacterStatusList[1].Cost;
                 Destroy(createdPrefab);
             }
 
@@ -68,7 +68,7 @@ public class ProtectedDudeAllocation : MonoBehaviour, ISelectHandler, IDeselectH
     void create()
     {
         createdPrefab = Instantiate(myPrefab);
-        playerPreparation.TotalHomeCost += homeStatusData.CharacterStatusList[0].Cost;
+        playerPreparation.TotalHomeCost += homeStatusData.CharacterStatusList[1].Cost;
         isCreated = true;
     }
 

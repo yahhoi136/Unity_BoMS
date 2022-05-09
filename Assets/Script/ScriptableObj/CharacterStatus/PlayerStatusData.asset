@@ -15,6 +15,7 @@ MonoBehaviour:
   CharacterStatusList:
   - _name: FOXDOG
     _mySide: Home
+    _enemyRnak: 0
     _cost: 0
     _hp: 100
     _atk: 20
@@ -27,13 +28,14 @@ MonoBehaviour:
     _playerLevelingData: {fileID: 11400000, guid: 30c2c6987b4ff46e08eb698ba07c5f7d, type: 2}
   - _name: WIZARD
     _mySide: Home
+    _enemyRnak: 0
     _cost: 0
     _hp: 60
-    _atk: 0
+    _atk: 10
     _atkRange: 0
     _atkRate: 0.7
     _spd: 3
     _gravity: 30
-    _prefab: {fileID: 0}
+    _prefab: {fileID: 8601838932317531780, guid: 799aa1efeaca04b9a99fadddc301d825, type: 3}
     _playerSprite: {fileID: 21300000, guid: 4ebc39f4e8cee44ad973deeaff77d935, type: 3}
     _playerLevelingData: {fileID: 11400000, guid: 7765d4b6838a341cfaa5919cd974ead5, type: 2}

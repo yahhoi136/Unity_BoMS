@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 1185645813526610780}
   - component: {fileID: 1185645813526610779}
   m_Layer: 0
-  m_Name: Weapon:Sword2
+  m_Name: Weapon:Sword1
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -750,9 +750,6 @@ MonoBehaviour:
   whoisClosestTarget: {fileID: -5456123769410932185}
   statusController: {fileID: 1655060445592999660}
   damageController: {fileID: -671208987649141320}
-  dataName: 
-  hp: 0
-  spd: 0
 --- !u!114 &-5456123769410932185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +774,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d774d84a007a46d1809461efd2cf454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataName: 
+  cost: 0
+  hp: 0
+  atk: 0
+  atkRate: 0
+  spd: 0
 --- !u!114 &-671208987649141320
 MonoBehaviour:
   m_ObjectHideFlags: 0

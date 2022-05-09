@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 1893469302847588501}
   - component: {fileID: 1893469302847588502}
   m_Layer: 0
-  m_Name: Weapon:Sword
+  m_Name: Weapon:Sword3
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1315,14 +1315,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterStatusData: {fileID: 11400000, guid: af17ffefdfbc44507b39fa07e0a3d02b, type: 2}
   animator: {fileID: 3475781853391670966}
-  character: {fileID: 3212019258762855962}
+  characterController: {fileID: 3212019258762855962}
   myWeaponMc: {fileID: 1893469302847588501}
   statusController: {fileID: -1352724216551635097}
   damageController: {fileID: 8752657452094300402}
   playerPreparation: {fileID: 0}
-  hp: 0
-  spd: 0
-  gravity: 0
 --- !u!114 &-1352724216551635097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,6 +1332,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d774d84a007a46d1809461efd2cf454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataName: 
+  cost: 0
+  hp: 0
+  atk: 0
+  atkRate: 0
+  spd: 0
 --- !u!114 &8752657452094300402
 MonoBehaviour:
   m_ObjectHideFlags: 0

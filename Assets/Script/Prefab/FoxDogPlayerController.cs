@@ -35,7 +35,7 @@ public class FoxDogPlayerController : MonoBehaviour, ICharacter, IAttackable
 	// インスペクタで接続
 	[SerializeField] CharacterStatusData characterStatusData;
 	[SerializeField] Animator animator;
-	[SerializeField] CharacterController character;
+	[SerializeField] CharacterController characterController;
 	[SerializeField] MeshCollider myWeaponMc;
 	[SerializeField] StatusController statusController;
 	[SerializeField] DamageController damageController;
@@ -132,7 +132,7 @@ public class FoxDogPlayerController : MonoBehaviour, ICharacter, IAttackable
 		// 重力
 		velocity.y -= characterStatusData.CharacterStatusList[0].Gravity * Time.deltaTime;
 
-		character.Move(velocity * Time.deltaTime);
+		characterController.Move(velocity * Time.deltaTime);
 
 		// 回転
 		transform.Rotate(0, h * statusController.spd * 0.5f, 0);

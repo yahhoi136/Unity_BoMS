@@ -12,18 +12,17 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] Text incrementText;
     [SerializeField] GameObject myDownButton;
     [SerializeField] float disappearTime = 0.1f;
-
     PlayerLeveling myLeveling;
 
+
+    // デリゲートに追加。
     private void Start()
     {
-        // AttackRateのレベリングデータ
-        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[3];
+        resetText();
 
-        // AttackRateUpボタン初期デザイン
-        incrementText.text = $"{playerPreparation.PlayerAtkRate}/s → {playerPreparation.PlayerAtkRate + myLeveling.Incre[0]}/s";
-        costText.text = $"COST {myLeveling.Cost[0]} ";
-
+        // デリゲートに追加。
+        playerPreparation.resetLv += this.resetLv;
+        playerPreparation.resetText += this.resetText;
     }
 
 
@@ -84,7 +83,7 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
     }
 
 
- ///// AtkRateDownボタンが押されたとき
+ ///// AtkRateDownボタンが押されたとき。インスペクタで接続
  ///
     public void AtkRatedown()
     {
@@ -106,6 +105,28 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 }
             }
         }
+    }
+
+ ///// キャラクターが代わって全て初期値に戻った時
+ ///
+    void resetLv()
+    {
+        // レベルを１に戻してコストを全返却。
+        while (playerPreparation.AtkRateLv > 1)
+        {
+            AtkRatedown();
+        }
+    }
+
+
+    void resetText()
+    {
+        // AttackRateのレベリングデータ
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[3];
+
+        // Textを初期値に
+        incrementText.text = $"{playerPreparation.PlayerAtkRate}/s → {playerPreparation.PlayerAtkRate + myLeveling.Incre[0]}/s";
+        costText.text = $"COST {myLeveling.Cost[0]} ";
     }
 
 

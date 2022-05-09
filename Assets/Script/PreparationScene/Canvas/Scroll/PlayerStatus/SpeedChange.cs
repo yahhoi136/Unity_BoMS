@@ -12,17 +12,17 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     [SerializeField] Text incrementText;
     [SerializeField] GameObject myDownButton;
     [SerializeField] float disappearTime = 0.1f;
-
     PlayerLeveling myLeveling;
 
+
+    // デリゲートに追加。
     private void Start()
     {
-        // Speedのレベリングデータ
-        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[2];
+        resetText();
 
-        // SpeedUpボタン初期デザイン
-        incrementText.text = $"{playerPreparation.PlayerSpd}m/s → {playerPreparation.PlayerSpd + myLeveling.Incre[0]}m/s";
-        costText.text = $"COST {myLeveling.Cost[0]} ";
+        // デリゲートに追加。
+        playerPreparation.resetLv += this.resetLv;
+        playerPreparation.resetText += this.resetText;
     }
 
 
@@ -50,7 +50,7 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
- ///// SpeedUpボタンが押されたとき
+ ///// SpeedUpボタンが押されたとき。
  ///
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -83,7 +83,7 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
- ///// SpdDownボタンが押されたとき
+ ///// SpdDownボタンが押されたとき。インスペクタで接続
  ///
     public void Spddown()
     {
@@ -108,4 +108,25 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     }
 
 
+ ///// キャラクターが代わって全て初期値に戻った時
+ ///
+    void resetLv()
+    {
+        // レベルを１に戻してコストを全返却。
+        while (playerPreparation.SpdLv > 1)
+        {
+            Spddown();
+        }
+    }
+
+
+    void resetText()
+    {
+        // Speedのレベリングデータ
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[2];
+
+        // Textを初期値に
+        incrementText.text = $"{playerPreparation.PlayerSpd}m/s → {playerPreparation.PlayerSpd + myLeveling.Incre[0]}m/s";
+        costText.text = $"COST {myLeveling.Cost[0]} ";
+     }
 }

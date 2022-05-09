@@ -12,18 +12,16 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Text incrementText;
     [SerializeField] GameObject myDownButton;
     [SerializeField] float disappearTime = 0.1f;
-
     PlayerLeveling myLeveling;
+
 
     private void Start()
     {
+        resetText();
 
-        // Hpのレベリングデータ
-        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[0];
-
-        // HpUpボタン初期デザイン
-        incrementText.text = $"HP{playerPreparation.PlayerHp} → {playerPreparation.PlayerHp + myLeveling.Incre[0]} ";
-        costText.text = $"COST {myLeveling.Cost[0]} ";
+        // デリゲートに追加。
+        playerPreparation.resetLv += this.resetLv;
+        playerPreparation.resetText += this.resetText;
     }
 
 
@@ -64,7 +62,7 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     playerPreparation.PlayerHp += myLeveling.Incre[i];
                     playerPreparation.TotalHomeCost += myLeveling.Cost[i];
-
+                    
                     if (myLeveling.MaxLv == i+2)
                     {
                         incrementText.text = $"HP{playerPreparation.PlayerHp} Max！";
@@ -84,7 +82,7 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     }
 
 
- ///// HpDownボタンが押されたとき
+ ///// HpDownボタンが押されたとき。インスペクタで接続
  ///
     public void Hpdown()
     {
@@ -106,6 +104,28 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
             }
         }
+    }
+
+
+ ///// キャラクターが代わって全て初期値に戻った時
+ ///
+    void resetLv()
+    {
+        // レベルを１に戻してコストを全返却。
+        while (playerPreparation.HpLv > 1)
+        {
+            Hpdown();
+        }
+    }
+
+    void resetText()
+    {
+        // Hpのレベリングデータ
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[0];
+
+        // テキストを初期値に。
+        incrementText.text = $"HP{playerPreparation.PlayerHp} → {playerPreparation.PlayerHp + myLeveling.Incre[0]} ";
+        costText.text = $"COST {myLeveling.Cost[0]} ";
     }
 
 

@@ -12,15 +12,15 @@ using UnityEngine;
  「①Difficulty設定→　②EnemyCostLimit設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
  ①〜③はEnemySpawnControllerで管理。④は各ボタンで管理。全てのHomeCostLimit,TotalHomeCostの呼び出し元はPlayerPreparationになっている。
 
-・PreparationSceneでのプレイヤーステータス管理
- PreparationSceneでのプレイヤーステータス管理は「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→
- ④各Up/Downボタンタップ時にステータス変動」の順に行われる。①〜③はPlayerChangeボタンで管理。④は各種ボタンで管理している。
- 全てのPlayerNum,MyStatus,PlayerLevelingData,Preparationでの各Playerステータス,の呼び出し元はPlayerPreparationになっている。
+・PreparationSceneでのプレイヤーステータス管理(戦闘開始時初期プレイヤーステータスの設定)
+ 「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→④各Up/Downボタンタップ時にステータス変動」の順に行われる。
+ ①〜③はPlayerChangeボタンで管理。④は各種ボタンで管理している。全てのPlayerNum,MyStatus,PlayerLevelingData,Preparationでの各Playerステータス,
+ の呼び出し元はPlayerPreparationになっている。
 
 ・キャラ配置管理
 「①新規キャラの配置/配置取り消し→　②既存キャラの移動/削除」の順に行われる。
- ①は各AllocationボタンとAllocationDeleteによって管理されており、②はAllocationControllerによって管理されている。
-
+ ①は各AllocationボタンとAllocationDeleteによって管理されており、②はAllocationControllerとAllocationDeleteによって管理されている。
+ 
 ・読み込み優先
  ScriptExcutionOrderで読み込みを、PreparationController →　EnemySpawnController →　PlayerPreparation or AllocationControllerの順で優先
 
@@ -31,8 +31,6 @@ using UnityEngine;
 public class PlayerPreparation : MonoBehaviour
 {
     #region 変数とプロパティ
-    [SerializeField] CharacterStatusData playerStatusData;
-
     // 数値確認
     [SerializeField, NotEditable] PlayerLevelingData _playerLevelingData;
     [SerializeField, NotEditable] CharacterStatus _myStatus;
@@ -57,23 +55,8 @@ public class PlayerPreparation : MonoBehaviour
     #endregion
 
 
-    void Start()
-    {
-
-        HpLv = 1; AtkLv = 1; SpdLv = 1; AtkRateLv = 1;
-        // きつね犬を初期値に。
-        MyStatus = playerStatusData.CharacterStatusList[0];
-        PlayerLevelingData = MyStatus.PlayerLevelingData;
-        PlayerHp = MyStatus.Hp;
-        PlayerAtk = MyStatus.Atk;
-        PlayerAtkRate = MyStatus.AtkRate;
-        PlayerSpd = MyStatus.Spd;
-        
-        // 初期値できつね犬prefab出します。
-        // prefabからここの参照を取らせます
-        // playerChangeで変更する度に今でてるplayerPrefabをdestroyして次のPlayerPrefabを出します。
-        // prefabの値を設定します。
-    }
-
+    public delegate void Reset();
+    public Reset resetLv;
+    public Reset resetText;
 }
 

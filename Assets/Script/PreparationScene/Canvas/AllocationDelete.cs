@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /*///
 
 ・AllocationDeleteボタン
- PushイベントでAllocationDeleteボタンを作動させたかったが、PushだとAllocation中のSelect状態が解除されるため
+ PushイベントでAllocationDeleteボタンを作動させたかったが、PushだとAllocationボタンのSelect状態が解除されるため
  AllocationDeleteボタンにEnterしたかどうかで擬似的に作動させることにしている
 
 /*///
