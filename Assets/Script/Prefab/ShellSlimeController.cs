@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-// SpawnするEnemyのPrefabの大きさは x×z = 4×4以内の大きさであればなんでもOK。
+// SpawnするEnemyのPrefabの大きさは X×Z = 4×4以内の大きさであればなんでもOK。
 public class ShellSlimeController : MonoBehaviour, ICharacter, IAttackable
 {
 

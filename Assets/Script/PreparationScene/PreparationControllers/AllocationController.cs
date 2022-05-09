@@ -41,7 +41,7 @@ public class AllocationController : MonoBehaviour
 
     void Update()
     {
-        // 新規キャラ配置中以外の時
+        // 新規キャラ配置中の時
         if (EventSystem.current.currentSelectedGameObject != null)
         {
             isButtonSelected = true;

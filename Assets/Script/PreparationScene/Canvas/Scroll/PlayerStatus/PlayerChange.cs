@@ -54,10 +54,12 @@ public class PlayerChange : MonoBehaviour, IPointerDownHandler
     void setFirstStatus()
     {
         playerPreparation.PlayerLevelingData = playerPreparation.MyStatus.PlayerLevelingData;
+        playerPreparation.PlayerName = playerPreparation.MyStatus.Name;
         playerPreparation.PlayerHp = playerPreparation.MyStatus.Hp;
         playerPreparation.PlayerAtk = playerPreparation.MyStatus.Atk;
         playerPreparation.PlayerAtkRate = playerPreparation.MyStatus.AtkRate;
         playerPreparation.PlayerSpd = playerPreparation.MyStatus.Spd;
+        playerPreparation.PlayerGravity = playerPreparation.MyStatus.Gravity;
         nowPrefab = Instantiate(playerPreparation.MyStatus.Prefab);
     }
 

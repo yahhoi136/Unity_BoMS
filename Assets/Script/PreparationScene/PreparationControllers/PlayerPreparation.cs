@@ -35,7 +35,8 @@ public class PlayerPreparation : MonoBehaviour
     [SerializeField, NotEditable] PlayerLevelingData _playerLevelingData;
     [SerializeField, NotEditable] CharacterStatus _myStatus;
     [SerializeField, NotEditable] int _homeCostLimit, _totalHomeCost, _playerNum, _hpLv, _atkLv, _spdLv, _atkRateLv;
-    [SerializeField, NotEditable] float _playerHp, _playerAtk, _playerAtkRate, _playerSpd;
+    [SerializeField, NotEditable] string _playerName;
+    [SerializeField, NotEditable] float _playerHp, _playerAtk, _playerAtkRate, _playerSpd, _playerGravity;
 
     public PlayerLevelingData PlayerLevelingData { get{ return _playerLevelingData; } set { _playerLevelingData = value; } }
     public CharacterStatus MyStatus { get{ return _myStatus; } set { _myStatus = value; } }
@@ -48,12 +49,13 @@ public class PlayerPreparation : MonoBehaviour
     public int SpdLv { get { return _spdLv; } set { _spdLv = value; } }
     public int AtkRateLv { get { return _atkRateLv; } set { _atkRateLv = value; } }
 
+    public string PlayerName { get { return _playerName; } set { _playerName = value; } }
     public float PlayerHp { get { return _playerHp; } set { _playerHp = value; } }
     public float PlayerAtk { get { return _playerAtk; } set { _playerAtk = value; } }
     public float PlayerAtkRate { get { return _playerAtkRate; } set { _playerAtkRate = value; } }
     public float PlayerSpd { get { return _playerSpd; } set { _playerSpd = value; } }
+    public float PlayerGravity { get{ return _playerGravity; } set { _playerGravity = value; } }
     #endregion
-
 
     public delegate void Reset();
     public Reset resetLv;

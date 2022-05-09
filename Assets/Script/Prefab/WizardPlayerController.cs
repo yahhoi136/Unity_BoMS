@@ -33,16 +33,12 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 {
 
 	// インスペクタで接続
-	[SerializeField] CharacterStatusData characterStatusData;
 	[SerializeField] Animator animator;
 	[SerializeField] CharacterController characterController;
 	[SerializeField] MeshCollider myWeaponMc;
 	[SerializeField] StatusController statusController;
 	[SerializeField] DamageController damageController;
 
-	/// <summary>
-	///　ステータスの誤用を確認するためにも、ReadonlyでdataNameを確認出来るようにしよう。
-	/// </summary>
 	[SerializeField, NotEditable] PlayerPreparation playerPreparation;
 	BattleController battleController;
 	GameObject[] targetCharacters;
@@ -75,6 +71,7 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 		if (SceneManager.GetActiveScene().name == "PreparationScene")
 		{
 			// 各初期ステータスを現在のステータスに代入
+			statusController.dataName = playerPreparation.PlayerName;
 			statusController.hp = playerPreparation.PlayerHp;
 			statusController.atk = playerPreparation.PlayerAtk;
 			statusController.atkRate = playerPreparation.PlayerAtkRate;
@@ -130,7 +127,7 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 		}
 
 		// 重力
-		velocity.y -= characterStatusData.CharacterStatusList[1].Gravity * Time.deltaTime;
+		velocity.y -= playerPreparation.PlayerGravity * Time.deltaTime;
 
 		characterController.Move(velocity * Time.deltaTime);
 
