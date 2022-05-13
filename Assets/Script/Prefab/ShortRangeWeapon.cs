@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// 全てのキャラクターは子オブジェクトのWeaponオブジェクト(Tag:Weapon)によって攻撃する。
+// 全てのキャラクターはWeaponオブジェクトによって攻撃する。Weaponオブジェクトの名前は「weapon:〇〇」になっている。
+// 近距離武器はShortRangeWeaponに、遠距離武器はLongRangeWeaponに管理される。
 // 
-public class Weapon : MonoBehaviour
+public class ShortRangeWeapon : MonoBehaviour
 {
-    [SerializeField] DamageController myDamageController;
+    DamageController myDamageController;
 
     [NotEditable] public float atk;
     string mySide;
@@ -16,6 +17,8 @@ public class Weapon : MonoBehaviour
 
     private void Start()
     {
+        myDamageController = transform.root.gameObject.GetComponent<DamageController>();
+
         // 一番上の親のタグでHomeかEnemyか判別
         mySide = transform.root.gameObject.tag;
         // 相手陣営の設定
@@ -36,7 +39,7 @@ public class Weapon : MonoBehaviour
         // 相手陣営のキャラクターに当たった時
         if (other.transform.root.gameObject.CompareTag(opponentSide))
         {
-            // 当たった武器のAtk分相手のdamageControllerを介して相手のHP減らす。
+            // 武器のAtk分相手のdamageControllerを介して相手のHP減らす。
             DamageController targetDamageController = other.transform.root.gameObject.GetComponent<DamageController>();
             targetDamageController.damage = atk;
             targetDamageController.takeDamage();

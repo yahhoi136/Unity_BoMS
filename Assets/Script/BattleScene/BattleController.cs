@@ -19,6 +19,7 @@ public class BattleController : MonoBehaviour
     int restNum;
     string rank;
     bool onceDone;
+    bool dieAfterWin;
 
     private void Start()
     {
@@ -47,14 +48,15 @@ public class BattleController : MonoBehaviour
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         Homes = GameObject.FindGameObjectsWithTag("Home");
 
-        // 味方0で敗北UI表示。敵0で勝利UI表示。両方0だと敗北。
-        if (Homes.Length == 0)
+        // 味方0で敗北UI表示。敵0で勝利UI表示。両方0になった時、0になったスピード差で勝敗決定。
+        if (Homes.Length == 0 && !dieAfterWin)
         {
             LoseUI.SetActive(true);
         }
         else if (Enemies.Length == 0 && onceDone == false)
         {
             WinUI.SetActive(true);
+            dieAfterWin = true;
         }
     }
 

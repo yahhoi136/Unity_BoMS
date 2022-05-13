@@ -149,11 +149,10 @@ public class FoxDogPlayerController : MonoBehaviour, ICharacter, IAttackable
 
 		AnimatorStateInfo state;
 
-		// 入力値を代入
+		// 入力でアニメーション起動
 		if (CrossPlatformInputManager.GetButton("Attack"))
         {
 			animator.SetTrigger(attackParamHash);
-
 		}
 
 		// 攻撃アニメーション中のみ武器の判定を有効に

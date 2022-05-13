@@ -35,7 +35,7 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	// インスペクタで接続
 	[SerializeField] Animator animator;
 	[SerializeField] CharacterController characterController;
-	[SerializeField] MeshCollider myWeaponMc;
+	[SerializeField] GameObject myFireBall;
 	[SerializeField] StatusController statusController;
 	[SerializeField] DamageController damageController;
 
@@ -43,6 +43,8 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	BattleController battleController;
 	GameObject[] targetCharacters;
 	bool gottenBC = false;
+	AnimatorStateInfo state;
+	bool onceCreated = false;
 
 	int speedParamHash = Animator.StringToHash("Speed");
 	int directionParamHash = Animator.StringToHash("Direction");
@@ -143,22 +145,22 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	///
 	public void Attack()
 	{
+
 		// 現在ステータスの代入
 		damageController.atk = statusController.atk;
 		animator.SetFloat(atkRateParamHash, playerPreparation.PlayerAtkRate);
 
-		AnimatorStateInfo state;
+		// 入力でアニメーション起動
+		if (CrossPlatformInputManager.GetButton("Attack")) { animator.SetTrigger(attackParamHash); }
 
-		// 入力値を代入
-		if (CrossPlatformInputManager.GetButton("Attack"))
-		{
-			animator.SetTrigger(attackParamHash);
-
-		}
-
-		// 攻撃アニメーション中のみ武器の判定を有効に
+		// 一度の攻撃アニメーション中に一度だけ火の玉を生成
 		state = animator.GetCurrentAnimatorStateInfo(0);
-		myWeaponMc.enabled = state.fullPathHash == baseAttackParamHash ? true : false;
+		if (state.fullPathHash != baseAttackParamHash) { onceCreated = false; }
+		if (state.fullPathHash == baseAttackParamHash && !onceCreated)
+		{
+			Instantiate(myFireBall, transform);
+			onceCreated = true;
+		}
 
 	}
 
@@ -176,7 +178,6 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 			if (statusController.hp <= 0)  // 死亡時
 			{
 				animator.SetTrigger(dieParamHash);
-				myWeaponMc.enabled = false;  // これないと死亡アニメーション中に攻撃してくる
 				this.enabled = false;
 			}
 		}
