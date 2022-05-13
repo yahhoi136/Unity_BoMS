@@ -17,7 +17,7 @@ MonoBehaviour:
     _numOfPhase: 3
     _minRank: 1
     _maxRank: 1
-    _minCost: 0
+    _minCost: 10
     _maxCost: 50
   - _rank: C
     _numOfPhase: 4

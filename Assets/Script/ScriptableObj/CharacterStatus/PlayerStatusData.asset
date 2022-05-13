@@ -22,7 +22,7 @@ MonoBehaviour:
     _atkRange: 0
     _atkRate: 0.7
     _spd: 5
-    _gravity: 30
+    _gravity: 100
     _prefab: {fileID: 3475781853401169162, guid: b07ae238598304720ba2a095a26353a2, type: 3}
     _playerSprite: {fileID: 21300000, guid: f1a77dfca8ec74b0a85ef7c572adf825, type: 3}
     _playerLevelingData: {fileID: 11400000, guid: 30c2c6987b4ff46e08eb698ba07c5f7d, type: 2}
@@ -35,7 +35,7 @@ MonoBehaviour:
     _atkRange: 0
     _atkRate: 0.7
     _spd: 3
-    _gravity: 30
-    _prefab: {fileID: 8601838932317531780, guid: 799aa1efeaca04b9a99fadddc301d825, type: 3}
+    _gravity: 100
+    _prefab: {fileID: 7607172035763285364, guid: 799aa1efeaca04b9a99fadddc301d825, type: 3}
     _playerSprite: {fileID: 21300000, guid: 4ebc39f4e8cee44ad973deeaff77d935, type: 3}
     _playerLevelingData: {fileID: 11400000, guid: 7765d4b6838a341cfaa5919cd974ead5, type: 2}

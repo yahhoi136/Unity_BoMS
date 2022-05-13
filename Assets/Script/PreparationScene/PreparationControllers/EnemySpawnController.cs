@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 #region PreparatioinControllers説明
@@ -11,7 +13,7 @@ using UnityEngine;
  初挑戦時とリトライ時での動作を変える。リトライ時か否か(isRetried)はPreparationController、リトライ用のデータはDataForRetryが全ての呼び出し元になっている。
 
 ・コスト管理
- 「①Difficulty設定→　②EnemyCostLimit設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
+ 「①Difficulty設定→　②maxCost設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
  ①〜③はEnemySpawnControllerで管理。④は各ボタンで管理。全てのHomeCostLimit,TotalHomeCostの呼び出し元はPlayerPreparationになっている。
 
 ・PreparationSceneでのプレイヤーステータス管理
@@ -30,7 +32,7 @@ using UnityEngine;
 #endregion
 
 
-public class EnemySpawnController: MonoBehaviour
+public class EnemySpawnController : MonoBehaviour
 {
     [SerializeField] PreparationController preparationController;
     [SerializeField] PlayerPreparation playerPreparation;
@@ -41,30 +43,40 @@ public class EnemySpawnController: MonoBehaviour
     [SerializeField, NotEditable] DataForRetry dataForRetry;
     List<CharacterStatus> enemyList;
     List<Vector3> pointList;
-
-    int enemyCostLimit;
-    int numOfSpawn;
-    int maxRange;
-    int filledPointCount = 0;
-    int homeCostLimit = 0;
+    SaveData data;
+    List<int> numOfSpawnList;
 
 
     void Start()
     {
         dataForRetry = GameObject.Find("DataForRetry").GetComponent<DataForRetry>();
 
-        // 初挑戦時とリトライ時で動作が違う。リトライ時は前回と同じ配置に。
+        // 初挑戦時とリトライ時で動作が違う。初戦時。
         if (!preparationController.IsRetried)
         {
+
             enemyList = enemyStatusData.CharacterStatusList;
             pointList = spawnPointData.SpawnPointList[0].Point;
 
-            playerPreparation.HomeCostLimit = spawn();
+            // 配列をシャッフル
+            enemyList = enemyList.OrderBy(i => Guid.NewGuid()).ToList();
+            pointList = pointList.OrderBy(i => Guid.NewGuid()).ToList();
+            setNumOfSpawn();
 
+            // numOfSpawnListの数だけ、シャッフルされたenemyList, pointListから敵をスポーン。
+            spawnEnemy(enemyList, pointList, numOfSpawnList);
+
+            // Retry用に値渡し。
+            dataForRetry.EnemyListForRe = new List<CharacterStatus>(enemyList);
+            dataForRetry.PointListForRe = new List<Vector3>(pointList);
+            dataForRetry.NumOfSpawnForRe = new List<int>(numOfSpawnList);
         }
+
+
+        // リトライ時は前回と同じ配置に。
         else
         {
-            playerPreparation.HomeCostLimit = retrySpawn();
+            spawnEnemy(dataForRetry.EnemyListForRe, dataForRetry.PointListForRe, dataForRetry.NumOfSpawnForRe);
         }
 
     }
@@ -74,76 +86,117 @@ public class EnemySpawnController: MonoBehaviour
     // 敵はDifficultyレベルで定められたコストの範囲内で、ランダムな種類の敵が、ランダムの場所に、ランダムな数配置される。
     // そして配置後に、その時の敵の総使用コストが、HomeLimitCostとなる。
 
-    // 流石にレベルデザインがクソすぎる。出てくるキャラもスライムとシェルスライムだけみたいなのから、勝っていくとドラゴンも出てくるようになるとか。コストに加えて、ランクを設定して、難易度１に対してはランク１以下の敵しか出ない、難易度２に対しては難易度２以下の敵が出るみたいにしよう。
     #endregion
 
-    public int spawn()
+
+    // 難易度で決定された、敵のランク、総コストの範囲内かつ、空きポジションがある範囲内で敵のスポーン数を決定する。
+     void setNumOfSpawn()
     {
-
-        // リストをシャッフル。ポジションと敵の種類の順番がランダムに。
-        enemyList = enemyList.OrderBy(i => Guid.NewGuid()).ToList();
-        pointList = pointList.OrderBy(i => Guid.NewGuid()).ToList();
-
-        // Retry用に値渡し。
-        dataForRetry.EnemyListForRe = new List<CharacterStatus>(enemyList);
-        dataForRetry.PointListForRe = new List<Vector3>(pointList);
-        dataForRetry.NumOfSpawnForRe = new List<int>();
-
-        // Difficultyレベルで敵配置コストの範囲が決定。
-        enemyCostLimit = difficultyData.DifficultyList[0].MaxCost;
+        Difficulty difficulty;
+        int minCost = 0;
+        int maxCost = 0;
+        int minRank = 0;
+        int maxRank = 0;
+        int maxRange;
+        int maxSpawn;
+        int numOfSpawn = 0;
+        int emptyPointNum;
+        int totalCost = 0;
 
 
-        // 敵の種類数だけ繰り返し
-        for (int i = 0; i < enemyList.Count; i++)
+        try  // セーブデータ読み込み
         {
-
-            // 現在の敵配置コスト上限 ÷ ランダムに選ばれた敵の種類のコスト、で最大可能生成数を計算→　からの生成数をランダムで決定。
-            // 保有コスト100、敵の種類スライム(コスト10)の時、最大で10匹生成。
-            maxRange = enemyCostLimit / enemyList[i].Cost;
-            numOfSpawn = UnityEngine.Random.Range(0, maxRange);
-
-            // Retry用。
-            dataForRetry.NumOfSpawnForRe.Add(numOfSpawn);
-
-
-            // 生成数だけ繰り返し
-            for (int p = 0; p < numOfSpawn; p++)
+            using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
             {
-                // spawnPointに空きがあり、配置しても敵配置コスト上限がマイナスにならない時
-                if (filledPointCount != pointList.Count && 0 < enemyCostLimit - enemyList[i].Cost)
-                {
-
-                    Instantiate(enemyList[i].Prefab, pointList[filledPointCount], Quaternion.Euler(0, 180, 0));
-                    
-                    enemyCostLimit -= enemyList[i].Cost;
-                    filledPointCount += 1;
-                    homeCostLimit += enemyList[i].Cost;
-
-                }
+                JsonSerializer serializer = new JsonSerializer();
+                data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
             }
         }
-        return homeCostLimit;
+        catch (FileNotFoundException)  // ファイルがない場合
+        {
+            print("ファイル無いよ");
+            print(Application.persistentDataPath);
+        }
+
+
+        // 難易度を現在のプレイヤーランクに設定
+        for (int i = 0; i < difficultyData.DifficultyList.Count; i++)
+        {
+            if (data.HighestArrival == difficultyData.DifficultyList[i].Rank)
+            {
+                difficulty = difficultyData.DifficultyList[i];
+
+                // 難易度から配置する敵のランクと総コストの範囲が決定。
+                minCost = difficulty.MinCost;
+                maxCost = difficulty.MaxCost;
+                minRank = difficulty.MinRank;
+                maxRank = difficulty.MaxRank;
+            }
+        }
+
+        emptyPointNum = pointList.Count;
+
+
+        // 総コストが範囲内になるまで繰り返し。
+        while (!(minCost <= totalCost && totalCost <= maxCost))
+        {
+            // 初期化
+            totalCost = 0;
+            numOfSpawnList = new List<int>();
+
+
+            // 全ての敵の種類について
+            for (int i = 0; i < enemyList.Count; i++)
+            {
+                // 敵ランクが範囲外の時、スポーン数0にして次へ
+                if (!(minRank <= enemyList[i].EnemyRank && enemyList[i].EnemyRank <= maxRank))
+                {
+                    numOfSpawnList.Add(0);
+                    continue;
+                }
+
+                // 現在のコスト上限 ÷ 選ばれた敵の種類のコスト、で最大可能生成数を計算。そして生成数をランダムで決定。
+                maxRange = (maxCost - totalCost) / enemyList[i].Cost;
+                maxSpawn = UnityEngine.Random.Range(0, maxRange);
+
+                // ただし、スポーン地点の空きの数だけ配置可能
+                if (0 <= emptyPointNum - maxSpawn)
+                {
+                    numOfSpawn = maxSpawn;
+                    totalCost += enemyList[i].Cost * numOfSpawn;
+                }
+                else
+                {
+                    numOfSpawn = emptyPointNum;
+                    totalCost += enemyList[i].Cost * numOfSpawn;
+                }
+
+                // 配置数をリスト化して記録
+                numOfSpawnList.Add(numOfSpawn);
+            }
+        }
     }
 
 
-
-    public int retrySpawn()
+    // 敵の情報とスポーン数は同じ順番で同じ要素数リストにされているため、検索不要。
+    // enemyList[敵Aの情報, 敵Cの情報, 敵Bの情報...] <-> numOfSpawnList[敵Aのスポーン数, 敵Cのスポーン数, 敵Bのスポーン数...]
+    void spawnEnemy(List<CharacterStatus> randomEnemyList, List<Vector3> randomPointList, List<int> numOfSpawnList)
     {
+        int filledPointCount = 0;
+
         // 敵の種類数だけ繰り返し
-        for (int i = 0; i < dataForRetry.EnemyListForRe.Count; i++)
+        for (int i = 0; i < randomEnemyList.Count; i++)
         {
 
             // 生成数だけ繰り返し
-            for (int p = 0; p < dataForRetry.NumOfSpawnForRe[i]; p++)
+            for (int p = 0; p < numOfSpawnList[i]; p++)
             {
-                Instantiate(dataForRetry.EnemyListForRe[i].Prefab, dataForRetry.PointListForRe[filledPointCount], Quaternion.Euler(0, 180, 0));
+                Instantiate(randomEnemyList[i].Prefab, randomPointList[filledPointCount], Quaternion.Euler(0, 180, 0));
 
                 filledPointCount += 1;
-                homeCostLimit += dataForRetry.EnemyListForRe[i].Cost;
+                playerPreparation.HomeCostLimit += randomEnemyList[i].Cost;
             }
         }
-        return homeCostLimit;
     }
-
 
 }

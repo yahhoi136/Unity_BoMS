@@ -22,7 +22,7 @@ MonoBehaviour:
     _atkRange: 2
     _atkRate: 0.8
     _spd: 5
-    _gravity: 30
+    _gravity: 100
     _prefab: {fileID: 1185721472537623166, guid: 4d1aca1d57e6745ff83f9869501b05cc, type: 3}
     _playerSprite: {fileID: 0}
     _playerLevelingData: {fileID: 0}
@@ -35,7 +35,7 @@ MonoBehaviour:
     _atkRange: 2.5
     _atkRate: 0
     _spd: 3
-    _gravity: 30
+    _gravity: 100
     _prefab: {fileID: 2354805300830874157, guid: 1e98254f12fc940b7bfe30cfe5293c9c, type: 3}
     _playerSprite: {fileID: 0}
     _playerLevelingData: {fileID: 0}

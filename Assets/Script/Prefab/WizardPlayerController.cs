@@ -93,7 +93,7 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 		targetCharacters = battleController.Enemies;
 
 		// Enemy陣営のキャラが0になった時に操作を止めさせる
-		if (targetCharacters.Length == 0)
+		if (targetCharacters.Length == 0 && SceneManager.GetActiveScene().name == "BattleScene")
 		{
 			animator.SetFloat(speedParamHash, 0);
 			return;

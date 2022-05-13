@@ -41,7 +41,8 @@ public class ProtectedDudeController : MonoBehaviour, ICharacter
 
     void Update()
     {
-        // PreparationSceneでは動かさない
+        // BattleScene以外では動かさない
+        if (SceneManager.GetActiveScene().name == "TitleScene") return;
         if (SceneManager.GetActiveScene().name == "PreparationScene")
         {
             DontDestroyOnLoad(gameObject);
