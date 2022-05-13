@@ -15,7 +15,6 @@ MonoBehaviour:
   LRWList:
   - _name: MagicFire
     _effect: {fileID: 1845955007268882, guid: f869e9b8e47444e32a55cef3244a0ef1, type: 3}
-    _rb: {fileID: -4647179197806247651, guid: b1aab0e9b437346dd91ce0ca0f42e7f9, type: 3}
-    _gravity: 0.1
+    _gravity: 0
     _spd: 3
     _disappearTime: 2

@@ -1,4 +1,4 @@
-Shader "EGA/Particles/FireSphere"
+Shader "FireSphere"
 {
 	Properties
 	{

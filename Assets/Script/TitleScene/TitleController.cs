@@ -10,9 +10,11 @@ using UnityEngine.UI;
 public class TitleController : MonoBehaviour
 {
     [SerializeField] DifficultyData difficultyData;
-    [SerializeField] GameObject saveData;
+    [SerializeField] GameObject saveDataUI;
     [SerializeField] Text dataText;
     [SerializeField] Text explanation;
+    [SerializeField] GameObject cautionUI;
+    [SerializeField] Button encycButton;
     SaveData data;
     bool isDataExsist;
     bool isLoadData;
@@ -44,7 +46,8 @@ public class TitleController : MonoBehaviour
 
     public void newGame()
     {
-        saveData.SetActive(true);
+        saveDataUI.SetActive(true);
+        encycButton.interactable = false;
 
         if (isDataExsist)
         {
@@ -63,8 +66,9 @@ public class TitleController : MonoBehaviour
 
     public void loadGame()
     {
-        saveData.SetActive(true);
+        saveDataUI.SetActive(true);
         isLoadData = true;
+        encycButton.interactable = false;
 
         if (isDataExsist)
         {
@@ -81,23 +85,35 @@ public class TitleController : MonoBehaviour
 
     public void yesButton()
     {
+        encycButton.interactable = false;
+
         if (isDataExsist && isLoadData)
         {
             SceneManager.LoadScene("PreparationScene");
         }
         else
         {
-            // 初めから用のデータを作る。
-            SaveData.SetSaveData(0, difficultyData.DifficultyList[0].Rank, difficultyData.DifficultyList[0].NumOfPhase, "0");
-            SceneManager.LoadScene("PreparationScene");
+            // CautionUIを表示して、さらにイエスだと初めから用のデータを作る。
+            cautionUI.SetActive(true);
         }
+    }
+
+
+    public void deleteYesButton()
+    {
+        // 初めから用のデータを作る。
+        SaveData.SetSaveData(0, difficultyData.DifficultyList[0].Rank, difficultyData.DifficultyList[0].NumOfPhase, "0");
+        SceneManager.LoadScene("PreparationScene");
     }
 
 
     public void backToTitle()
     {
-        saveData.SetActive(false);
+        saveDataUI.SetActive(false);
+        cautionUI.SetActive(false);
         isLoadData = false;
+        encycButton.interactable = true;
+
     }
 
 
