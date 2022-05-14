@@ -95,9 +95,9 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
             {
                 if (playerPreparation.AtkRateLv == i + 2)
                 {
-                    playerPreparation.PlayerAtkRate -= myLeveling.Incre[i];
+                    // なぜか値が.9999999のようにバグるので四捨五入で調節。
+                    playerPreparation.PlayerAtkRate = Mathf.Round((playerPreparation.PlayerAtkRate - myLeveling.Incre[i]) * 10) / 10;
                     playerPreparation.TotalHomeCost -= myLeveling.Cost[i];
-
                     incrementText.text = $"{playerPreparation.PlayerAtkRate}/s → {playerPreparation.PlayerAtkRate + myLeveling.Incre[i]}/s";
                     costText.text = $"COST {myLeveling.Cost[i]} ";
 

@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -8,7 +6,10 @@ using UnityEngine;
 /*///
 
 ・セーブデータ
- セーブデータのクラスと書き込みメソッドの宣言はSaveDataで、セーブ内容のWinningStreak、HighestArrival、Completionの設定はBattleControllerで行っている。
+ セーブデータのクラスと書き込みメソッドの宣言はSaveDataで、セーブ内容のWinningStreak、HighestArrival、Completionの書き込みはBattleControllerで行っている。
+
+・ランク
+ ランクはD→ C→ B→ A→ Sとなっており、数字で表される場合は、Dから順に1〜5となっている。
 
 /*///
 #endregion
@@ -19,25 +20,25 @@ public class SaveData
 
     [JsonProperty("連勝数")]
     public int WinningStreak { get; set; }
-    [JsonProperty("最高到達ランク")]
-    public string HighestArrival { get; set; }
+    [JsonProperty("到達ランク(文字列)")]
+    public string ArrivalRankStr { get; set; }
+    [JsonProperty("到達ランク(整数)")]
+    public int ArrivalRankInt { get; set; }
     [JsonProperty("次ランクまでの勝利数")]
     public int RestNum { get; set; }
     [JsonProperty("図鑑完成率")]
-    public string Completion { get; set; }
+    public int EncycCompletion { get; set; }
 
 
-    // newでJson作ります→　シリアライズ化します→　書き込みます。
-    // デシリアライズしながら読み込みます
-
-    public static void SetSaveData(int winningStreak,string highestArrival,int restNum, string completion)
+    public static void SetSaveData(int winningStreak, string arrivalRankStr, int arrivalRankInt, int restNum, int encycCompletion)
     {
         var data = new SaveData()
         {
             WinningStreak = winningStreak,
-            HighestArrival = $"{highestArrival}",
+            ArrivalRankStr = arrivalRankStr,
+            ArrivalRankInt = arrivalRankInt,
             RestNum = restNum,
-            Completion = $"{completion}",
+            EncycCompletion = encycCompletion,
         };
 
         File.WriteAllText(Application.persistentDataPath + "/SaveData.json", JsonConvert.SerializeObject(data, Formatting.Indented));

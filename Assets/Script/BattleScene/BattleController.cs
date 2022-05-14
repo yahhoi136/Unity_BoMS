@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -13,13 +11,14 @@ public class BattleController : MonoBehaviour
     public GameObject[] Homes;
     [SerializeField] GameObject LoseUI;
     [SerializeField] GameObject WinUI;
-
     [SerializeField] DifficultyData difficultyData;
+    [SerializeField] EncycData encycData;
     SaveData data;
     int restNum;
-    string rank;
-    bool onceDone;
-    bool dieAfterWin;
+    string rankStr;
+    int rankInt;
+    int encycCompletion;
+    bool alreadyWin;
 
     private void Start()
     {
@@ -48,42 +47,20 @@ public class BattleController : MonoBehaviour
         Enemies = GameObject.FindGameObjectsWithTag("Enemy");
         Homes = GameObject.FindGameObjectsWithTag("Home");
 
-        // 味方0で敗北UI表示。敵0で勝利UI表示。両方0になった時、0になったスピード差で勝敗決定。
-        if (Homes.Length == 0 && !dieAfterWin)
+        // 味方0で敗北UI表示。敵0で勝利UI表示。両方0になった時、0になったスピードが早い方が負け。
+        if (Homes.Length == 0 && !alreadyWin)
         {
             LoseUI.SetActive(true);
         }
-        else if (Enemies.Length == 0 && onceDone == false)
+        else if (Enemies.Length == 0)
         {
             WinUI.SetActive(true);
-            dieAfterWin = true;
+            alreadyWin = true;
         }
     }
 
 
-    // 連勝数 - 各Difficultyのphase数 でランクを計算。
-    void calculateRank()
-    {
-        // 連勝数＋１
-        data.WinningStreak += 1;
-        int winStForCal = data.WinningStreak;
-
-        for (int i = 0; 0 <= winStForCal && i < difficultyData.DifficultyList.Count; i++)
-        {
-            winStForCal -= difficultyData.DifficultyList[i].NumOfPhase;
-            rank = difficultyData.DifficultyList[i].Rank;
-            restNum = -winStForCal;
-
-            // ランクが最大(S)になった時に「次ランクまでの勝利数」を常に０に。
-            if (restNum < 0) restNum = 0;
-        }
-
-        SaveData.SetSaveData(data.WinningStreak, rank, restNum, data.Completion);
-        onceDone = true;
-    }
-
-
-    // Retry。Retryすると連勝数加算されない。ここで前回セーブしたPreparationSceneをそのまま表示し直す。
+    // Retryボタン。Retryすると連勝数加算されない。ここで前回セーブしたPreparationSceneをそのまま表示し直す。
     public void returnToPreparationScene()
     {
         GameObject.Find("DataForRetry").tag = "Retried";
@@ -91,7 +68,7 @@ public class BattleController : MonoBehaviour
     }
 
 
-    // Title。DontDestroyOnloadを解除。
+    // Titleボタン。DontDestroyOnloadを解除。
     public void moveToTitleScene()
     {
         calculateRank();
@@ -100,7 +77,7 @@ public class BattleController : MonoBehaviour
     }
 
 
-    // Next。DontDestroyOnloadを解除
+    // Nextボタン。DontDestroyOnloadを解除
     public void nextToPreparationScene()
     {
         calculateRank();
@@ -108,4 +85,35 @@ public class BattleController : MonoBehaviour
         SceneManager.LoadScene("PreparationScene");
     }
 
+
+    
+    void calculateRank()
+    {
+        // 連勝数＋１
+        data.WinningStreak += 1;
+
+        // 連勝数 - 各Difficultyのphase数 で現在ランクと次のランクまでの勝利数を計算。
+        int winStForCal = data.WinningStreak;
+        for (int i = 0; 0 <= winStForCal && i < difficultyData.DifficultyList.Count; i++)
+        {
+            winStForCal -= difficultyData.DifficultyList[i].PhaseNum;
+            rankStr = difficultyData.DifficultyList[i].RankStr;
+            rankInt = difficultyData.DifficultyList[i].RankInt;
+            restNum = -winStForCal;
+
+            // ランクが最大(S)になった時に「次ランクまでの勝利数」を常に０に。
+            if (restNum < 0) restNum = 0;
+        }
+
+        // 現在ランクから図鑑完成率を計算。現在ランク以下の図鑑項数 ÷ 全項数。
+        int completionNum = 0;
+        for(int i = 0; i < encycData.EncycList.Count; i++)
+        {
+            if (encycData.EncycList[i].RankInt <= rankInt) completionNum += 1;
+        }
+        encycCompletion = completionNum * 100 / encycData.EncycList.Count;
+
+        //  セーブデータに書き込み
+        SaveData.SetSaveData(data.WinningStreak, rankStr, rankInt, restNum, encycCompletion);
+    }
 }

@@ -1706,6 +1706,7 @@ MonoBehaviour:
   LoseUI: {fileID: 2085031891}
   WinUI: {fileID: 1516771183}
   difficultyData: {fileID: 11400000, guid: 308c1080e3dea4d56b5225579c56e7f3, type: 2}
+  encycData: {fileID: 11400000, guid: 03f8e3c2b315c4eaea2e7f550b50d551, type: 2}
 --- !u!4 &4455205300285181984
 Transform:
   m_ObjectHideFlags: 0

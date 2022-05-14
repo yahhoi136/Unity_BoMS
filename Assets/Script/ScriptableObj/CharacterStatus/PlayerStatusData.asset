@@ -15,7 +15,8 @@ MonoBehaviour:
   CharacterStatusList:
   - _name: FOXDOG
     _mySide: Home
-    _enemyRnak: 0
+    _rankStr: D
+    _rankInt: 1
     _cost: 0
     _hp: 100
     _atk: 20
@@ -28,7 +29,8 @@ MonoBehaviour:
     _playerLevelingData: {fileID: 11400000, guid: 30c2c6987b4ff46e08eb698ba07c5f7d, type: 2}
   - _name: WIZARD
     _mySide: Home
-    _enemyRnak: 0
+    _rankStr: A
+    _rankInt: 4
     _cost: 0
     _hp: 60
     _atk: 10

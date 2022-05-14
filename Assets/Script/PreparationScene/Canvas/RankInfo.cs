@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -30,13 +28,13 @@ public class RankInfo : MonoBehaviour
             print(Application.persistentDataPath);
         }
 
-        nowRank.text = $"{data.HighestArrival}";
+        nowRank.text = $"{data.ArrivalRankStr}";
         nextRank.text = $"次ランクまで\n あと{data.RestNum} 連勝！";
 
         // nowRankの色設定
         for(int i = 0; i < colorsData.ColorsList.Count; i++)
         {
-            if(colorsData.ColorsList[i].Identifier == data.HighestArrival)
+            if(colorsData.ColorsList[i].Identifier == data.ArrivalRankStr)
             {
                 nowRank.color = colorsData.ColorsList[i].Color;
             }

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,8 +21,8 @@ public class CharacterStatusData : ScriptableObject
 public class CharacterStatus
 {
     // 一番上のstringはリストの名前になるので常に設定。 
-    [SerializeField] private string _name, _mySide;
-    [SerializeField] private int _enemyRnak, _cost;
+    [SerializeField] private string _name, _mySide, _rankStr;
+    [SerializeField] private int _rankInt, _cost;
     [SerializeField] private float _hp, _atk, _atkRange, _atkRate, _spd, _gravity;
     [SerializeField] private GameObject _prefab;
     [SerializeField] private Sprite _playerSprite;
@@ -31,7 +30,8 @@ public class CharacterStatus
 
     public string Name { get { return _name; } }
     public string MySide { get { return _mySide; } }
-    public int EnemyRank { get{ return _enemyRnak; } }
+    public string RankStr { get { return _rankStr; } }
+    public int RankInt { get{ return _rankInt; } }
     public int Cost { get { return _cost; } }
     public float Hp { get{ return _hp; } }
     public float Atk { get { return _atk; } }

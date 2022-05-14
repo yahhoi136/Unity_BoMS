@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -39,7 +36,7 @@ public class TitleController : MonoBehaviour
             isDataExsist = false;
             print("ファイル無いよ");
             print(Application.persistentDataPath);
-
+            encycButton.interactable = false;
         }
 
     }
@@ -52,7 +49,7 @@ public class TitleController : MonoBehaviour
 
         if (isDataExsist)
         {
-            dataText.text = $"最高到達ランク　{data.HighestArrival}\n\n 図鑑完成率        {data.Completion} % ";
+            dataText.text = $"最高到達ランク   {data.ArrivalRankStr}\n\n 図鑑完成率        {data.EncycCompletion} %";
             explanation.text = "このデータを削除して初めからにしますか？";
 
         }
@@ -73,7 +70,7 @@ public class TitleController : MonoBehaviour
 
         if (isDataExsist)
         {
-            dataText.text = $"最高到達ランク　{data.HighestArrival}\n\n 図鑑完成率        {data.Completion} % ";
+            dataText.text = $"最高到達ランク　{data.ArrivalRankStr}\n\n 図鑑完成率        {data.EncycCompletion} % ";
             explanation.text = "このデータをロードしますか？";
         }
         else
@@ -103,7 +100,7 @@ public class TitleController : MonoBehaviour
     public void deleteYesButton()
     {
         // 初めから用のデータを作る。
-        SaveData.SetSaveData(0, difficultyData.DifficultyList[0].Rank, difficultyData.DifficultyList[0].NumOfPhase, "0");
+        SaveData.SetSaveData(0, difficultyData.DifficultyList[0].RankStr, difficultyData.DifficultyList[0].RankInt, difficultyData.DifficultyList[0].PhaseNum, 0);
         SceneManager.LoadScene("PreparationScene");
     }
 
@@ -113,7 +110,8 @@ public class TitleController : MonoBehaviour
         saveDataUI.SetActive(false);
         cautionUI.SetActive(false);
         isLoadData = false;
-        encycButton.interactable = true;
+
+        if (isDataExsist) encycButton.interactable = true;
 
     }
 

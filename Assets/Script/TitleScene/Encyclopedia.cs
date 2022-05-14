@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +11,27 @@ public class Encyclopedia : MonoBehaviour
 {
     [SerializeField] EncycData encycData;
     [SerializeField] Text Name;
+    [SerializeField] Text MySide;
     [SerializeField] Text Page;
     [SerializeField] Text Status;
     [SerializeField] Text Explanation;
     [SerializeField] Button forwardButton;
     [SerializeField] Button backButton;
+    SaveData data;
     int charaNum;
     Encyc encyc;
     GameObject nowDemoPrefab;
+
+
+    // データのロード。データがないときはボタンが無効化されててEncyclopediaは開けない。
+    private void Start()
+    {
+        using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
+        }
+    }
 
 
     // Encycが開かれる度に、1ページ目を表示
@@ -39,12 +52,21 @@ public class Encyclopedia : MonoBehaviour
         
         charaNum += 1;
         if (charaNum == encycData.EncycList.Count) forwardButton.interactable = false;
+        if (nowDemoPrefab) Destroy(nowDemoPrefab);
         backButton.interactable = true;
-        encyc = encycData.EncycList[charaNum - 1];
 
-        Destroy(nowDemoPrefab);
+        encyc = encycData.EncycList[charaNum - 1];
         Page.text = $"{charaNum} / {encycData.EncycList.Count}";
-        display(encyc);
+        MySide.text = $"{encyc.MySide}";
+        // 到達ランクがそのキャラのランク以上で表示。
+        if(encyc.RankInt <= data.ArrivalRankInt)
+        {
+            display(encyc);
+        }
+        else
+        {
+            displayUnknown(encyc);
+        }
 
     }
 
@@ -55,12 +77,22 @@ public class Encyclopedia : MonoBehaviour
 
         charaNum -= 1;
         if (charaNum == 1) backButton.interactable = false;
+        if (nowDemoPrefab) Destroy(nowDemoPrefab);
         forwardButton.interactable = true;
+
         encyc = encycData.EncycList[charaNum - 1];
-        
-        Destroy(nowDemoPrefab);
         Page.text = $"{charaNum} / {encycData.EncycList.Count}";
-        display(encyc);
+
+        // 到達ランクがそのキャラのランク以上で表示。
+        if (encyc.RankInt <= data.ArrivalRankInt)
+        {
+            display(encyc);
+        }
+        else
+        {
+            displayUnknown(encyc);
+        }
+
     }
 
 
@@ -68,9 +100,16 @@ public class Encyclopedia : MonoBehaviour
     {
         Name.text = encyc.Name;
         nowDemoPrefab = Instantiate(encyc.DemoPrefab, transform);
-        Status.text = $" RANK    {encyc.Rank}         COST   {encyc.Cost} \nHP       {encyc.Hp}            ATK   {encyc.Atk}\nATK/s  {encyc.AtkRate}            SPD  {encyc.Spd}";
+        Status.text = $" RANK    {encyc.RankStr}          COST   {encyc.Cost} \nHP       {encyc.Hp}            ATK   {encyc.Atk}\nATK/s  {encyc.AtkRate}            SPD  {encyc.Spd}";
         Explanation.text = encyc.Explanation;
 
+    }
+
+    void displayUnknown(Encyc encyc)
+    {
+        Name.text = "？？？";
+        Status.text = " RANK    ー         COST   ー \nHP         ー            ATK   ー\nATK/s    ー            SPD   ー";
+        Explanation.text = $"\n      〜  ランク {encyc.RankStr} 以上で解放  〜\n";
     }
 
 

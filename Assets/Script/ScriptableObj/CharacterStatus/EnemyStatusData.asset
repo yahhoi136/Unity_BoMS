@@ -15,7 +15,8 @@ MonoBehaviour:
   CharacterStatusList:
   - _name: Slime
     _mySide: Enemy
-    _enemyRnak: 1
+    _rankStr: D
+    _rankInt: 1
     _cost: 10
     _hp: 100
     _atk: 5
@@ -28,7 +29,8 @@ MonoBehaviour:
     _playerLevelingData: {fileID: 0}
   - _name: ShellSlime
     _mySide: Enemy
-    _enemyRnak: 1
+    _rankStr: C
+    _rankInt: 2
     _cost: 20
     _hp: 130
     _atk: 10
