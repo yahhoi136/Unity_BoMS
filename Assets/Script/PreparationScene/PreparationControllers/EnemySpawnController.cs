@@ -13,23 +13,26 @@ using UnityEngine;
  初挑戦時とリトライ時での動作を変える。リトライ時か否か(isRetried)はPreparationController、リトライ用のデータはDataForRetryが全ての呼び出し元になっている。
 
 ・コスト管理
- 「①Difficulty設定→　②maxCost設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
+ 「①Difficulty設定→　②EnemyCostLimit設定→　③HomeCostLimit設定→　④各必要コストからTotalHomeCostの計算」の順に行われる。
  ①〜③はEnemySpawnControllerで管理。④は各ボタンで管理。全てのHomeCostLimit,TotalHomeCostの呼び出し元はPlayerPreparationになっている。
 
-・PreparationSceneでのプレイヤーステータス管理
- PreparationSceneでのプレイヤーステータス管理は「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→
- ④各Up/Downボタンタップ時にステータス変動」の順に行われる。①〜③はPlayerChangeボタンで管理。④は各種ボタンで管理している。
- 全てのPlayerNum,MyStatus,PlayerLevelingData,Preparationでの各Playerステータス,の呼び出し元はPlayerPreparationになっている。
+・PreparationSceneでのプレイヤーステータス管理(戦闘開始時初期プレイヤーステータスの設定)
+ 「①PlayerNum設定→　②MyStatusを設定→　③PlayerLevelingDataと各種初期ステータスを設定→④各Up/Downボタンタップ時にステータス変動」の順に行われる。
+ ①〜③はPlayerChangeボタンで管理。④は各種ボタンで管理している。全てのPlayerNum,MyStatus,PlayerLevelingData,Preparationでの各Playerステータス,
+ の呼び出し元はPlayerPreparationになっている。
+ ちなみに、AtkRateとは、1秒間の攻撃回数になっている。全てのキャラは1秒に1回だけ攻撃アニメーションをするように(1度に2回攻撃するものは2秒に1回だけ)、
+ Animatorで調節しており、その倍数のMultiplierとしてAtkrateで攻撃速度を設定できる。
 
 ・キャラ配置管理
 「①新規キャラの配置/配置取り消し→　②既存キャラの移動/削除」の順に行われる。
  ①は各AllocationボタンとAllocationDeleteによって管理されており、②はAllocationControllerとAllocationDeleteによって管理されている。
-
+ 
 ・読み込み優先
  ScriptExcutionOrderで読み込みを、PreparationController →　EnemySpawnController →　PlayerPreparation or AllocationControllerの順で優先
 
 /*///
 #endregion
+
 
 
 public class EnemySpawnController : MonoBehaviour
@@ -164,11 +167,13 @@ public class EnemySpawnController : MonoBehaviour
                 {
                     numOfSpawn = maxSpawn;
                     totalCost += enemyList[i].Cost * numOfSpawn;
+                    emptyPointNum -= maxSpawn;
                 }
                 else
                 {
                     numOfSpawn = emptyPointNum;
                     totalCost += enemyList[i].Cost * numOfSpawn;
+                    emptyPointNum = 0;
                 }
 
                 // 配置数をリスト化して記録
@@ -183,7 +188,6 @@ public class EnemySpawnController : MonoBehaviour
     void spawnEnemy(List<CharacterStatus> randomEnemyList, List<Vector3> randomPointList, List<int> numOfSpawnList)
     {
         int filledPointCount = 0;
-
         // 敵の種類数だけ繰り返し
         for (int i = 0; i < randomEnemyList.Count; i++)
         {

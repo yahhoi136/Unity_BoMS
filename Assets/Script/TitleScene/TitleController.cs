@@ -15,6 +15,7 @@ public class TitleController : MonoBehaviour
     [SerializeField] Text explanation;
     [SerializeField] GameObject cautionUI;
     [SerializeField] Button encycButton;
+    [SerializeField] GameObject encyclopedia;
     SaveData data;
     bool isDataExsist;
     bool isLoadData;
@@ -117,8 +118,15 @@ public class TitleController : MonoBehaviour
     }
 
 
-    public void encyclopedia()
+    public void openEncyclopedia()
     {
-
+        if (encyclopedia.activeInHierarchy)
+        {
+            encyclopedia.SetActive(false);
+        }
+        else
+        {
+            encyclopedia.SetActive(true);
+        }
     }
 }

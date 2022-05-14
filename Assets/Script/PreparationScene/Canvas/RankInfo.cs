@@ -9,8 +9,9 @@ public class RankInfo : MonoBehaviour
 {
     [SerializeField] Text nowRank;
     [SerializeField] Text nextRank;
+    [SerializeField] ColorsData colorsData;
     SaveData data;
- 
+
     void Start()
     {
         try
@@ -31,6 +32,15 @@ public class RankInfo : MonoBehaviour
 
         nowRank.text = $"{data.HighestArrival}";
         nextRank.text = $"次ランクまで\n あと{data.RestNum} 連勝！";
+
+        // nowRankの色設定
+        for(int i = 0; i < colorsData.ColorsList.Count; i++)
+        {
+            if(colorsData.ColorsList[i].Identifier == data.HighestArrival)
+            {
+                nowRank.color = colorsData.ColorsList[i].Color;
+            }
+        }
     }
 
 
