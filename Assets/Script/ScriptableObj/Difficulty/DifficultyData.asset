@@ -15,7 +15,7 @@ MonoBehaviour:
   DifficultyList:
   - _rankStr: D
     _rankInt: 1
-    _phaseNum: 3
+    _phaseNum: 1
     _minRank: 1
     _maxRank: 1
     _minCost: 10
@@ -38,8 +38,8 @@ MonoBehaviour:
     _rankInt: 4
     _phaseNum: 5
     _minRank: 2
-    _maxRank: 3
-    _minCost: 150
+    _maxRank: 2
+    _minCost: 50
     _maxCost: 200
   - _rankStr: S
     _rankInt: 5

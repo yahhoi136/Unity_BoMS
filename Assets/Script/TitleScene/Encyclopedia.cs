@@ -23,9 +23,10 @@ public class Encyclopedia : MonoBehaviour
     GameObject nowDemoPrefab;
 
 
-    // データのロード。データがないときはボタンが無効化されててEncyclopediaは開けない。
+    
     private void Start()
     {
+        // データのロード。データがないときはTitleControllerの方でボタンが無効化されててEncyclopediaは開けない。
         using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -82,7 +83,7 @@ public class Encyclopedia : MonoBehaviour
 
         encyc = encycData.EncycList[charaNum - 1];
         Page.text = $"{charaNum} / {encycData.EncycList.Count}";
-
+        MySide.text = $"{encyc.MySide}";
         // 到達ランクがそのキャラのランク以上で表示。
         if (encyc.RankInt <= data.ArrivalRankInt)
         {

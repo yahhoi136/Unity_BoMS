@@ -1,41 +1,39 @@
+using System.Collections;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
-// ScriptExcutionOrderで一番初めに呼ばれるように設定。
+// ScriptExcutionOrderでBattleSceneで一番初めに呼ばれるように設定。
 public class BattleController : MonoBehaviour
 {
 
     public GameObject[] Enemies;
     public GameObject[] Homes;
-    [SerializeField] GameObject LoseUI;
-    [SerializeField] GameObject WinUI;
     [SerializeField] DifficultyData difficultyData;
     [SerializeField] EncycData encycData;
+    [SerializeField] GameObject loseUI;
+    [SerializeField] GameObject winUI;
+    [SerializeField] GameObject releaseUI;
+    [SerializeField] Text releaseText;
     SaveData data;
     int restNum;
     string rankStr;
     int rankInt;
     int encycCompletion;
     bool alreadyWin;
+    bool rankUp;
+
 
     private void Start()
     {
-        try
+
+        // セーブデータ読み込み
+        using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
         {
-            // セーブデータ読み込み
-            using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
-            }
-        }
-        // ファイルがない場合
-        catch (FileNotFoundException)
-        {
-            print("ファイル無いよ");
-            print(Application.persistentDataPath);
+            JsonSerializer serializer = new JsonSerializer();
+            data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
         }
 
     }
@@ -50,11 +48,11 @@ public class BattleController : MonoBehaviour
         // 味方0で敗北UI表示。敵0で勝利UI表示。両方0になった時、0になったスピードが早い方が負け。
         if (Homes.Length == 0 && !alreadyWin)
         {
-            LoseUI.SetActive(true);
+            loseUI.SetActive(true);
         }
         else if (Enemies.Length == 0)
         {
-            WinUI.SetActive(true);
+            winUI.SetActive(true);
             alreadyWin = true;
         }
     }
@@ -71,8 +69,15 @@ public class BattleController : MonoBehaviour
     // Titleボタン。DontDestroyOnloadを解除。
     public void moveToTitleScene()
     {
-        calculateRank();
-        SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene()); 
+        calculateData();
+        StartCoroutine(Coroutine1());
+    }
+
+    IEnumerator Coroutine1()
+    {
+        // ランクアップ時は解放されたキャラを3秒表示
+        if (rankUp) yield return new WaitForSeconds(3);
+        SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene());
         SceneManager.LoadScene("TitleScene");
     }
 
@@ -80,14 +85,20 @@ public class BattleController : MonoBehaviour
     // Nextボタン。DontDestroyOnloadを解除
     public void nextToPreparationScene()
     {
-        calculateRank();
+        calculateData();
+        StartCoroutine(Coroutine2());
+    }
+
+    IEnumerator Coroutine2()
+    {
+        if (rankUp) yield return new WaitForSeconds(3);
         SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene());
         SceneManager.LoadScene("PreparationScene");
     }
 
 
-    
-    void calculateRank()
+
+    void calculateData()
     {
         // 連勝数＋１
         data.WinningStreak += 1;
@@ -105,15 +116,35 @@ public class BattleController : MonoBehaviour
             if (restNum < 0) restNum = 0;
         }
 
+
         // 現在ランクから図鑑完成率を計算。現在ランク以下の図鑑項数 ÷ 全項数。
         int completionNum = 0;
-        for(int i = 0; i < encycData.EncycList.Count; i++)
+        for (int i = 0; i < encycData.EncycList.Count; i++)
         {
             if (encycData.EncycList[i].RankInt <= rankInt) completionNum += 1;
         }
         encycCompletion = completionNum * 100 / encycData.EncycList.Count;
 
-        //  セーブデータに書き込み
+
+        // ランクが上がった時、新たに解放されたエネミー以外のキャラクター達を表示(フォントの大きさから4体まで)。
+        if (rankInt != data.ArrivalRankInt)
+        {
+
+            for (int i = 0; i < encycData.EncycList.Count; i++)
+            {
+                if (encycData.EncycList[i].RankInt == rankInt && encycData.EncycList[i].MySide != "エネミー")
+                {
+                    releaseText.text += $"\n{encycData.EncycList[i].Name}";
+                }
+            }
+
+            releaseUI.SetActive(true);
+            rankUp = true;
+        }
+
+
+        // セーブデータに書き込み
         SaveData.SetSaveData(data.WinningStreak, rankStr, rankInt, restNum, encycCompletion);
     }
+
 }

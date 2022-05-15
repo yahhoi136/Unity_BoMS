@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +11,7 @@ public class HumanKnightAllocation : MonoBehaviour, ISelectHandler, IDeselectHan
     [SerializeField] AllocationDelete allocationDelete;
     [SerializeField] GameObject myPrefab;
     [SerializeField] Text costText;
+    SaveData data;
     GameObject createdPrefab;
     bool isSelected;
     bool isCreated;
@@ -18,6 +19,16 @@ public class HumanKnightAllocation : MonoBehaviour, ISelectHandler, IDeselectHan
 
     void Start()
     {
+        // データのロード。
+        using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
+        }
+
+        // 自身の到達ランクが、このキャラのランクよりも低い時、このキャラの配置ボタンを非表示に。
+        if (data.ArrivalRankInt < homeStatusData.CharacterStatusList[0].RankInt) gameObject.SetActive(false);
+
         costText.text = $"COST {homeStatusData.CharacterStatusList[0].Cost} ";
     }
 
