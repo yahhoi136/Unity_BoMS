@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 // 全てのキャラクターはWeaponオブジェクトによって攻撃する。Weaponオブジェクトの名前は「weapon:〇〇」になっている。
 // 近距離武器はShortRangeWeaponに、遠距離武器はLongRangeWeaponに管理される。

@@ -29,7 +29,7 @@ Transform:
   m_Children:
   - {fileID: 2352907285069430741}
   m_Father: {fileID: 2352791512907839955}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}
 --- !u!1 &2353738073734809613
 GameObject:
@@ -274,7 +274,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 2352791512907839955}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2396239030616837537
 SkinnedMeshRenderer:
@@ -622,9 +622,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.1, z: -1}
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
+  - {fileID: 8340261403800754203}
   - {fileID: 2358044641149979287}
   - {fileID: 2358120657712321381}
-  - {fileID: 8340261403800754203}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -677,13 +677,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2448646250118604249}
   rb: {fileID: 2354805300830874155}
+  myWeaponMc: {fileID: 0}
   characterStatusData: {fileID: 11400000, guid: b86977ffe47f94850ad92b47369a68fc, type: 2}
+  characterNum: 2
   whoisClosestTarget: {fileID: -5221613829412650736}
   statusController: {fileID: -4651278512413483787}
   damageController: {fileID: -6118051327655056483}
-  dataName: 
-  hp: 0
-  spd: 0
 --- !u!114 &-5221613829412650736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -708,6 +707,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d774d84a007a46d1809461efd2cf454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataName: 
+  cost: 0
+  hp: 0
+  atk: 0
+  atkRate: 0
+  spd: 0
 --- !u!114 &-6118051327655056483
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,9 +1022,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8340261403800754203}
-  - component: {fileID: 8340261403800754200}
+  - component: {fileID: 3952181710941777158}
   m_Layer: 10
-  m_Name: BodyMeshController
+  m_Name: BodyController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,10 +1042,10 @@ Transform:
   m_LocalScale: {x: 0.15, y: 0.12, z: 0.15}
   m_Children: []
   m_Father: {fileID: 2352791512907839955}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &8340261403800754200
-MeshCollider:
+--- !u!136 &3952181710941777158
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1049,7 +1054,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

@@ -18,3 +18,8 @@ MonoBehaviour:
     _gravity: 0
     _spd: 3
     _disappearTime: 2
+  - _name: DragonFire
+    _effect: {fileID: 1845955007268882, guid: f869e9b8e47444e32a55cef3244a0ef1, type: 3}
+    _gravity: 0
+    _spd: -3
+    _disappearTime: 2

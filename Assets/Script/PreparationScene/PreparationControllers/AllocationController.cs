@@ -86,7 +86,7 @@ public class AllocationController : MonoBehaviour
             }
 
             // HomeTerritoryの中だけを追従。
-            if (-10 < x && x < 10 && -12 < z && z < 0) { homeChara.transform.position = new Vector3(x, 0.1f, z); }
+            if (-10 < x && x < 10 && -12 < z && z < -1) { homeChara.transform.position = new Vector3(x, 0.1f, z); }
 
             // キャラ移動中のみAllocationDeleteボタンが光る。
             allocationDelete.myButton.interactable = true;

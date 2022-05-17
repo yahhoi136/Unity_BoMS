@@ -86,39 +86,33 @@ public class EnemySpawnController : MonoBehaviour
 
 
     #region 敵配置とHomeCostLimit設定の説明。
-    // 敵はDifficultyレベルで定められたコストの範囲内で、ランダムな種類の敵が、ランダムの場所に、ランダムな数配置される。
+    // 敵はDifficultyレベルで定められたCostとRankの範囲内で、ランダムな種類の敵が、ランダムの場所に、ランダムな数配置される。
     // そして配置後に、その時の敵の総使用コストが、HomeLimitCostとなる。
+    // Difficultyによる難易度はMaxCostとRankの範囲で決められるが、Costの最低限保証がCost = 0 以外で存在しないため、
+    // よりMaxCostに近い生成を可能にするためには(難易度に対して敵が少すぎなくするには)、Phase数を多くしてRankの範囲を広げて、ランダム生成のムラを無くす必要がある。
 
     #endregion
 
 
     // 難易度で決定された、敵のランク、総コストの範囲内かつ、空きポジションがある範囲内で敵のスポーン数を決定する。
-     void setNumOfSpawn()
+    void setNumOfSpawn()
     {
         Difficulty difficulty;
-        int minCost = 0;
         int maxCost = 0;
         int minRank = 0;
         int maxRank = 0;
         int maxRange;
         int maxSpawn;
-        int numOfSpawn = 0;
         int emptyPointNum;
         int totalCost = 0;
+        int numOfSpawn = 0;
 
 
-        try  // セーブデータ読み込み
+        // セーブデータ読み込み
+        using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
         {
-            using (var reader = new StreamReader(Application.persistentDataPath + "/SaveData.json"))
-            {
-                JsonSerializer serializer = new JsonSerializer();
-                data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
-            }
-        }
-        catch (FileNotFoundException)  // ファイルがない場合
-        {
-            print("ファイル無いよ");
-            print(Application.persistentDataPath);
+            JsonSerializer serializer = new JsonSerializer();
+            data = (SaveData)serializer.Deserialize(reader, typeof(SaveData));
         }
 
 
@@ -130,7 +124,6 @@ public class EnemySpawnController : MonoBehaviour
                 difficulty = difficultyData.DifficultyList[i];
 
                 // 難易度から配置する敵のランクと総コストの範囲が決定。
-                minCost = difficulty.MinCost;
                 maxCost = difficulty.MaxCost;
                 minRank = difficulty.MinRank;
                 maxRank = difficulty.MaxRank;
@@ -139,14 +132,12 @@ public class EnemySpawnController : MonoBehaviour
 
         emptyPointNum = pointList.Count;
 
-
-        // 総コストが範囲内になるまで繰り返し。
-        while (!(minCost <= totalCost && totalCost <= maxCost))
+        // 敵キャラ0の時はやり直し。
+        while (totalCost == 0)
         {
             // 初期化
             totalCost = 0;
             numOfSpawnList = new List<int>();
-
 
             // 全ての敵の種類について
             for (int i = 0; i < enemyList.Count; i++)

@@ -513,7 +513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e3ead30146544869565684eb24a611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myDamageController: {fileID: -671208987649141320}
   atk: 0
 --- !u!1 &1185659544397966858
 GameObject:
@@ -747,6 +746,7 @@ MonoBehaviour:
   rb: {fileID: 1185721472537623152}
   myWeaponMc: {fileID: 1185645813526610780}
   characterStatusData: {fileID: 11400000, guid: b86977ffe47f94850ad92b47369a68fc, type: 2}
+  characterNum: 1
   whoisClosestTarget: {fileID: -5456123769410932185}
   statusController: {fileID: 1655060445592999660}
   damageController: {fileID: -671208987649141320}
@@ -2439,9 +2439,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7744117222949425813}
-  - component: {fileID: 7744117222949425814}
+  - component: {fileID: 8310451793429060846}
   m_Layer: 10
-  m_Name: BodyMeshCollider
+  m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2461,8 +2461,8 @@ Transform:
   m_Father: {fileID: 1188043322797512780}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &7744117222949425814
-MeshCollider:
+--- !u!136 &8310451793429060846
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2471,7 +2471,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}

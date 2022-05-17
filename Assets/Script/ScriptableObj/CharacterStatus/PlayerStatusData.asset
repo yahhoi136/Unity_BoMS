@@ -32,7 +32,7 @@ MonoBehaviour:
     _rankStr: A
     _rankInt: 4
     _cost: 0
-    _hp: 60
+    _hp: 50
     _atk: 10
     _atkRange: 0
     _atkRate: 0.7

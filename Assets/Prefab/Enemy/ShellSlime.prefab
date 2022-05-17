@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 635968703478156630}
-  - component: {fileID: 635968703478156625}
+  - component: {fileID: 8477235148047964830}
   m_Layer: 12
-  m_Name: BodyMeshCollider
+  m_Name: BodyCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,10 +30,10 @@ Transform:
   m_Children:
   - {fileID: 3775012167891488132}
   m_Father: {fileID: 2819445693809238347}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!64 &635968703478156625
-MeshCollider:
+--- !u!136 &8477235148047964830
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -42,10 +42,10 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 0d3c605385d6d9547a1e3f24e8248962, type: 3}
+  m_Radius: 0.6
+  m_Height: 1.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.05, z: 0.6}
 --- !u!1 &2824576493217845433
 GameObject:
   m_ObjectHideFlags: 0
@@ -686,8 +686,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.13463865, z: -0.5692238}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2828099184022968219}
   - {fileID: 635968703478156630}
+  - {fileID: 2828099184022968219}
   m_Father: {fileID: 2819366448156707805}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 33.5739, y: -110.82105, z: -166.12006}
@@ -813,6 +813,7 @@ MonoBehaviour:
   rb: {fileID: 2825804701835041034}
   myWeaponMc: {fileID: 3775012167891488130}
   characterStatusData: {fileID: 11400000, guid: 6190f22539a6a42bf9dd862cf349e285, type: 2}
+  characterNum: 1
   whoisClosestTarget: {fileID: -8353312139274494184}
   statusController: {fileID: -4502857506949827319}
   damageController: {fileID: -3585935230493241318}
@@ -891,7 +892,7 @@ Transform:
   - {fileID: 2819813735740045661}
   - {fileID: 2827872618509461553}
   m_Father: {fileID: 2819445693809238347}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -0.6973591, y: -6.672006, z: -13.850049}
 --- !u!1 &2825812387771282659
 GameObject:
@@ -1284,5 +1285,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48e3ead30146544869565684eb24a611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myDamageController: {fileID: -3585935230493241318}
   atk: 0

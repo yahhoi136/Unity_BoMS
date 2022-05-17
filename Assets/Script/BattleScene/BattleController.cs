@@ -69,7 +69,7 @@ public class BattleController : MonoBehaviour
     // Titleボタン。DontDestroyOnloadを解除。
     public void moveToTitleScene()
     {
-        calculateData();
+        if (alreadyWin) calculateData();
         StartCoroutine(Coroutine1());
     }
 
