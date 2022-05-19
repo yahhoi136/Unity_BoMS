@@ -121,7 +121,7 @@ public class SpeedChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     void resetText()
     {
         // Speedのレベリングデータ
-        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[2];
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[3];
 
         // Textを初期値に
         incrementText.text = $"{playerPreparation.PlayerSpd}m/s → {playerPreparation.PlayerSpd + myLeveling.Incre[0]}m/s";

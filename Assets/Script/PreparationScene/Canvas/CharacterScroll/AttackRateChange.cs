@@ -120,7 +120,7 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void resetText()
     {
         // AttackRateのレベリングデータ
-        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[3];
+        myLeveling = playerPreparation.PlayerLevelingData.playerLevelingList[2];
 
         // Textを初期値に
         incrementText.text = $"{playerPreparation.PlayerAtkRate}/s → {playerPreparation.PlayerAtkRate + myLeveling.Incre[0]}/s";

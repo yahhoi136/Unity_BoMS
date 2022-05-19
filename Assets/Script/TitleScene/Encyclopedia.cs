@@ -101,7 +101,7 @@ public class Encyclopedia : MonoBehaviour
     {
         Name.text = encyc.Name;
         nowDemoPrefab = Instantiate(encyc.DemoPrefab, transform);
-        Status.text = $" RANK    {encyc.RankStr}          COST   {encyc.Cost} \nHP       {encyc.Hp}            ATK   {encyc.Atk}\nATK/s  {encyc.AtkRate}            SPD  {encyc.Spd}";
+        Status.text = $" RANK    {encyc.RankStr}          COST   {encyc.Cost} \nHP       {encyc.Hp}            ATK   {encyc.Atk}\nATK/s   {encyc.AtkRate}            SPD  {encyc.Spd}";
         Explanation.text = encyc.Explanation;
 
     }

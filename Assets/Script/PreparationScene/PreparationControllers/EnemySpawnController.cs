@@ -58,11 +58,11 @@ public class EnemySpawnController : MonoBehaviour
         if (!preparationController.IsRetried)
         {
 
-            enemyList = enemyStatusData.CharacterStatusList;
+            enemyList = new List<CharacterStatus>(enemyStatusData.CharacterStatusList);
             pointList = spawnPointData.SpawnPointList[0].Point;
 
-            // 配列をシャッフル
-            enemyList = enemyList.OrderBy(i => Guid.NewGuid()).ToList();
+            // 配列を逆転＆シャッフル
+            enemyList.Reverse();
             pointList = pointList.OrderBy(i => Guid.NewGuid()).ToList();
             setNumOfSpawn();
 
@@ -86,7 +86,7 @@ public class EnemySpawnController : MonoBehaviour
 
 
     #region 敵配置とHomeCostLimit設定の説明。
-    // 敵はDifficultyレベルで定められたCostとRankの範囲内で、ランダムな種類の敵が、ランダムの場所に、ランダムな数配置される。
+    // 敵はDifficultyレベルで定められたCostとRankの範囲内で、高コストの敵から順にが、ランダムの場所に、ランダムな数配置される。
     // そして配置後に、その時の敵の総使用コストが、HomeLimitCostとなる。
     // Difficultyによる難易度はMaxCostとRankの範囲で決められるが、Costの最低限保証がCost = 0 以外で存在しないため、
     // よりMaxCostに近い生成を可能にするためには(難易度に対して敵が少すぎなくするには)、Phase数を多くしてRankの範囲を広げて、ランダム生成のムラを無くす必要がある。

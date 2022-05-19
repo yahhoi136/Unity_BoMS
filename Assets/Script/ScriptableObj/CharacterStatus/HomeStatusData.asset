@@ -32,10 +32,10 @@ MonoBehaviour:
     _rankStr: C
     _rankInt: 2
     _cost: 10
-    _hp: 100
-    _atk: 7
-    _atkRange: 2
-    _atkRate: 0.8
+    _hp: 80
+    _atk: 5
+    _atkRange: 3.5
+    _atkRate: 1.2
     _spd: 5
     _gravity: 100
     _prefab: {fileID: 1185721472537623166, guid: 4d1aca1d57e6745ff83f9869501b05cc, type: 3}
@@ -59,11 +59,11 @@ MonoBehaviour:
     _mySide: Home
     _rankStr: S
     _rankInt: 5
-    _cost: 30
-    _hp: 200
+    _cost: 25
+    _hp: 300
     _atk: 30
-    _atkRange: 4
-    _atkRate: 0.6
+    _atkRange: 20
+    _atkRate: 0.4
     _spd: 2
     _gravity: 100
     _prefab: {fileID: 7100590381416323856, guid: dccda746a861d482e944d84e834863a2, type: 3}

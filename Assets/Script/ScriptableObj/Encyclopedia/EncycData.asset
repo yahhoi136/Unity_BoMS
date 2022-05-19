@@ -16,7 +16,7 @@ MonoBehaviour:
   - _name: "\u304D\u3064\u306D\u72AC"
     _mySide: "\u30D7\u30EC\u30A4\u30E4\u30FC"
     _demoPrefab: {fileID: 3029908806703721750, guid: 7f4c52a924ea94151a39c34dfc35111f, type: 3}
-    _rankStr: D
+    _rankStr: 'D '
     _rankInt: 1
     _cost: "\u30FC"
     _hp: 100
@@ -28,24 +28,24 @@ MonoBehaviour:
   - _name: "\u30A6\u30A3\u30B6\u30FC\u30C9"
     _mySide: "\u30D7\u30EC\u30A4\u30E4\u30FC"
     _demoPrefab: {fileID: 720308823535163880, guid: 47828d19ff65448689dc2ecca3ae9ded, type: 3}
-    _rankStr: A
+    _rankStr: 'A '
     _rankInt: 4
     _cost: "\u30FC"
-    _hp: ' 60'
-    _atk: 10
+    _hp: ' 50'
+    _atk: 40
     _atkRate: 0.7
     _spd: 3.0
     _explanation: "\u30D7\u30EC\u30A4\u30E4\u30FC\u3002\u653B\u6483\u529B\u306E\u9AD8\u3044\u9060\u8DDD\u96E2\u9B54\u6CD5\u653B\u6483\u3092\u4F7F\u3048\u308B\u3002\u305F\u3060\u3057\u9B54\u6CD5\u306B\u5168\u632F\u308A\u3057\u3059\u304E\u3066\u3001\u305D\u308C\u4EE5\u5916\u306F\u30CB\u30EF\u30C8\u30EA\u4E26\u3060\u3068\u304B\u3001\u3001\u3001\u3002"
   - _name: "\u30CB\u30EF\u30C8\u30EA"
     _mySide: "\u30DB\u30FC\u30E0"
     _demoPrefab: {fileID: 7707964047291640332, guid: 778824d34a37f445783132fa5a21a5ff, type: 3}
-    _rankStr: D
+    _rankStr: 'D '
     _rankInt: 1
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: ' 5'
+    _hp: ' 50'
+    _atk: '  0'
+    _atkRate: '  0'
+    _spd: 3.0
     _explanation: "\n                   \u30B3\u30B1\u30FC\uFF01"
   - _name: "\u4EBA\u9593\u306E\u5175\u58EB"
     _mySide: "\u30DB\u30FC\u30E0"
@@ -53,9 +53,9 @@ MonoBehaviour:
     _rankStr: C
     _rankInt: 2
     _cost: 10
-    _hp: 100
-    _atk: ' 7'
-    _atkRate: 0.8
+    _hp: ' 80'
+    _atk: '  5'
+    _atkRate: 1.2
     _spd: 5.0
     _explanation: "\u5897\u63F4\u306B\u304D\u3066\u304F\u308C\u305F\u5473\u65B9\u3002\u4E00\u5EA6\u306B2\u56DE\u9023\u7D9A\u3067\u653B\u6483\u3067\u304D\u308B\u4E0A\u306B\u3001\u79FB\u52D5\u3082\u65E9\u3044\u50CD\u304D\u8005\u3002\u50CD\u304D\u3059\u304E\u3066\u4F53\u529B\u306F\u6B8B\u3063\u3066\u3044\u306A\u3044\u3002"
   - _name: "\u30D7\u30ED\u30C6\u30AF\u30C8\u5144\u8CB4"
@@ -63,22 +63,22 @@ MonoBehaviour:
     _demoPrefab: {fileID: 6970074810389900574, guid: 8a6c7e17c49164a31969b6b1aec89552, type: 3}
     _rankStr: B
     _rankInt: 3
-    _cost: 
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: 15
+    _hp: 180
+    _atk: '  0'
+    _atkRate: '  0'
+    _spd: 3.0
     _explanation: "\u3059\u3054\u3044\u786C\u3044\u5473\u65B9\u3002\u30AC\u30C1\u30AC\u30C1\u306B\u9632\u5177\u3067\u8EAB\u3092\u5B88\u3063\u3066\u3044\u308B\u305F\u3081\u3001\u8010\u4E45\u529B\u304C\u9AD8\u3044\u3002\u305F\u3060\u3057\u30AC\u30C1\u30AC\u30C1\u3059\u304E\u3066\u4E0A\u624B\u304F\u52D5\u3051\u305A\u3001\u653B\u6483\u3082\u3067\u304D\u306A\u3044\u3002"
   - _name: "\u30B4\u30FC\u30EC\u30E0"
     _mySide: "\u30DB\u30FC\u30E0"
     _demoPrefab: {fileID: 8711633596872205444, guid: cc0d03cf5a31145e88b914d893c9cbf7, type: 3}
     _rankStr: S
     _rankInt: 5
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: 25
+    _hp: 300
+    _atk: 30
+    _atkRate: 0.4
+    _spd: 2.0
     _explanation: "\u5F37\u3044\u5473\u65B9\u3002\u529B\u3053\u305D\u30D1\u30EF\u30FC\u3002\u3044\u3084\u3001\u30D1\u30EF\u30FC\u3053\u305D\u529B\u304B\uFF1F\u3069\u3063\u3061\u306A\u3093\u3060
       \u3044\u3001\u3084\u3041\u30FC\u30FC\uFF01"
   - _name: "\u30B9\u30E9\u30A4\u30E0"
@@ -86,53 +86,53 @@ MonoBehaviour:
     _demoPrefab: {fileID: 374509502593197930, guid: 9eca9ff2bdef1487992f73c6e1e52bc4, type: 3}
     _rankStr: D
     _rankInt: 1
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: ' 5'
+    _hp: ' 80'
+    _atk: '  7'
+    _atkRate: 0.6
+    _spd: 3.0
     _explanation: "\u5F31\u3044\u6575\u3002\u6570\u591A\u304F\u306E\u30B2\u30FC\u30E0\u306B\u51FA\u6F14\u3057\u3066\u3044\u308B\u304C\u3001\u6700\u5F31\u306E\u540D\u3092\u6B32\u3057\u3044\u307E\u307E\u306B\u3057\u3066\u3044\u308B\u3002\u300C\u306A\u3093\u3067\u4FFA\u3089\u3063\u3066\u3069\u3053\u884C\u3063\u3066\u3082\u5F31\u3044\u3093\u3060\u308D\u3046\u300D\u305D\u3093\u306A\u30A2\u30A4\u30C7\u30F3\u30C6\u30A3\u30C6\u30A3\u306B\u60A9\u3080\u6628\u4ECA\u3002"
   - _name: "\u30B7\u30A7\u30EB\u30B9\u30E9\u30A4\u30E0"
     _mySide: "\u30A8\u30CD\u30DF\u30FC"
     _demoPrefab: {fileID: 9158360666351763101, guid: 3eb342d70b51c407abb1f3c15ac8a080, type: 3}
     _rankStr: C
     _rankInt: 2
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: 10
+    _hp: 140
+    _atk: '  2'
+    _atkRate: 0.5
+    _spd: 2.0
     _explanation: "\u786C\u3044\u6575\u3002\u7531\u6765\u306F100\u5E74\u751F\u304D\u305F\u4E80\u304C\u6B7B\u5F8C\u30C9\u30ED\u30C9\u30ED\u306B\u306A\u3063\u305F\u3068\u304B\u3001\u30B9\u30E9\u30A4\u30E0\u304C\u30D8\u30EB\u30E1\u30C3\u30C8\u88AB\u3063\u305F\u3089\u629C\u3051\u306A\u304F\u306A\u3063\u305F\u3068\u304B\u8AF8\u8AAC\u3042\u308B\u3002\u30C8\u30B2\u304C\u75DB\u305D\u3046\u3002"
   - _name: "\u86EE\u65CF"
     _mySide: "\u30A8\u30CD\u30DF\u30FC"
     _demoPrefab: {fileID: 3929227679885856489, guid: dc9ea411ac55e4d66b975a3deda138eb, type: 3}
     _rankStr: B
     _rankInt: 3
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: 15
+    _hp: 100
+    _atk: 10
+    _atkRate: 0.6
+    _spd: 4.0
     _explanation: "\u6016\u3044\u6575\u3002\u305D\u306E\u30AC\u30BF\u30A4\u306E\u826F\u3055\u3067\u82E5\u3044\u6642\u306F\u3076\u3044\u3076\u3044\u8A00\u308F\u305B\u3066\u3044\u305F\u3002\u6700\u8FD1\u306F\u5927\u4EBA\u306B\u306A\u3063\u3066\u300C\u7A4F\u3084\u304B\u306B\u306A\u3063\u305F\u306D\u300D\u3068\u3088\u304F\u8A00\u308F\u308C\u308B\u3002"
   - _name: "\u30C9\u30E9\u30B4\u30F3"
     _mySide: "\u30A8\u30CD\u30DF\u30FC"
     _demoPrefab: {fileID: 3061144721723730379, guid: 8650e368816c54e979429f62d906ec37, type: 3}
     _rankStr: A
     _rankInt: 4
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: 20
+    _hp: 170
+    _atk: 30
+    _atkRate: 0.6
+    _spd: 4.0
     _explanation: "\u5F37\u3044\u6575\u3002\u9060\u304F\u304B\u3089\u3081\u3061\u3083\u71B1\u3044\u706B\u3092\u5410\u3044\u3066\u304F\u308B\u3002\u706B\u306F\u5F53\u305F\u3089\u306A\u3051\u308C\u3070\u3069\u3046\u3068\u3044\u3046\u3053\u3068\u306F\u306A\u3044\u304C\u3001\u5F53\u305F\u308C\u3070\u5B87\u5B99\u3067\u30C1\u30EA\u306B\u306A\u308B\u3002"
   - _name: "\u30AD\u30F3\u30B0\u30B9\u30E9\u30A4\u30E0"
     _mySide: "\u30A8\u30CD\u30DF\u30FC"
     _demoPrefab: {fileID: 6149235792497188488, guid: 50f4be4e1c11f4d5e9391a94a3dfd302, type: 3}
     _rankStr: S
     _rankInt: 5
-    _cost: "\u30FC"
-    _hp: 
-    _atk: 
-    _atkRate: 
-    _spd: 
+    _cost: 25
+    _hp: 200
+    _atk: 70
+    _atkRate: 0.3
+    _spd: 2.0
     _explanation: "\u3067\u304B\u304F\u3066\u5F37\u3044\u6575\u3002\u65E5\u9803\u3057\u3044\u305F\u3052\u3089\u308C\u3066\u304D\u305F\u6068\u307F\u3001\u3064\u3089\u307F\u3001\u8089\u30B7\u30DF\u3001\u30DB\u30B3\u30EA\u306A\u3069\u3067\u9ED2\u304F\u306A\u3063\u305F\u3002\u3053\u306E\u5927\u304D\u3055\u306F10\u5339\u5206\u3058\u3083\u306A\u3044\u3088\u3046\u306A\u3001\u3001"

@@ -17,6 +17,7 @@ public class BattleController : MonoBehaviour
     [SerializeField] GameObject winUI;
     [SerializeField] GameObject releaseUI;
     [SerializeField] Text releaseText;
+    [SerializeField] Text maxRank;
     SaveData data;
     int restNum;
     string rankStr;
@@ -75,8 +76,9 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Coroutine1()
     {
-        // ランクアップ時は解放されたキャラを3秒表示
-        if (rankUp) yield return new WaitForSeconds(3);
+        // ランクアップ時はタップされたら次のシーンへ。(一つ前のタップが影響して誤判定されるのを防ぐために数秒待たせる)
+        yield return new WaitForSeconds(0.5f);
+        if (rankUp) yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene());
         SceneManager.LoadScene("TitleScene");
     }
@@ -91,7 +93,8 @@ public class BattleController : MonoBehaviour
 
     IEnumerator Coroutine2()
     {
-        if (rankUp) yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(0.5f);
+        if (rankUp) yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         SceneManager.MoveGameObjectToScene(GameObject.Find("DataForRetry"), SceneManager.GetActiveScene());
         SceneManager.LoadScene("PreparationScene");
     }
@@ -137,6 +140,8 @@ public class BattleController : MonoBehaviour
                     releaseText.text += $"\n{encycData.EncycList[i].Name}";
                 }
             }
+
+            if (rankStr == "SS") maxRank.enabled = true;
 
             releaseUI.SetActive(true);
             rankUp = true;

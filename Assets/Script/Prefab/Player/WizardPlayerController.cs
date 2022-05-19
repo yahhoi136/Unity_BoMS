@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 #region  キャラクターコントローラー説明
@@ -36,6 +37,8 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	[SerializeField] GameObject myFireBall;
 	[SerializeField] StatusController statusController;
 	[SerializeField] DamageController damageController;
+	[SerializeField] Canvas hpCanvas;
+	[SerializeField] Slider hpSlider;
 
 	[SerializeField, NotEditable] PlayerPreparation playerPreparation;
 	BattleController battleController;
@@ -87,9 +90,13 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 		{
 			battleController = GameObject.FindGameObjectWithTag("BattleController").GetComponent<BattleController>();
 			SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+
+			// hpに応じてHpバーの長さを調節
+			hpSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(2.5f * playerPreparation.PlayerHp, 20f);
 			gottenBC = true;
 		}
 
+		hpCanvas.enabled = true;
 		targetCharacters = battleController.Enemies;
 
 		// Enemy陣営のキャラが0になった時に操作を止めさせる
@@ -167,7 +174,12 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	///
 	public void ReLoadHp()
 	{
-		// 与ダメ処理は各Weaponオブジェクトに
+		// 常にHpCanvasをMain Cameraに向かせる＆HpSliderの設定
+		hpCanvas.transform.rotation = Camera.main.transform.rotation;
+		hpSlider.value = statusController.hp / playerPreparation.PlayerHp;
+
+
+		// 被ダメ処理与ダメ処理は各Weaponオブジェクトに
 		if (damageController.isTakeDamage)
 		{
 			statusController.hp = damageController.hpDecrease(statusController.hp);
@@ -176,10 +188,10 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 			if (statusController.hp <= 0)  // 死亡時
 			{
 				animator.SetTrigger(dieParamHash);
+				hpSlider.value = 0;
 				this.enabled = false;
 			}
 		}
-
 	}
 
 	// コールバックで死亡アニメーション後にオブジェクト削除＆ターゲットリスト更新。

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 // SpawnするEnemyのPrefabの大きさは X×Z = 4×4以内の大きさであればなんでもOK。
@@ -12,6 +13,8 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
     [SerializeField] GameObject myFireBall;
     [SerializeField] CharacterStatusData characterStatusData;
     [SerializeField] int characterNum;
+    [SerializeField] Canvas hpCanvas;
+    [SerializeField] Slider hpSlider;
     // 他で実装
     [SerializeField] WhoisClosestTarget whoisClosestTarget;
     [SerializeField] StatusController statusController;
@@ -41,6 +44,8 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
         statusController.atkRate = myStatus.AtkRate;
         statusController.spd = myStatus.Spd;
 
+        // hpに応じてHpバーの長さを調節
+        hpSlider.GetComponent<RectTransform>().sizeDelta = new Vector2(2.5f * myStatus.Hp, 20f);
     }
 
 
@@ -50,6 +55,8 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
         if (SceneManager.GetActiveScene().name == "TitleScene") return;
         if (SceneManager.GetActiveScene().name == "PreparationScene")
         {
+            // 配置時に滑らないように
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             DontDestroyOnLoad(gameObject);
             return;
         }
@@ -59,9 +66,11 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
         {
             battleController = GameObject.FindGameObjectWithTag("BattleController").GetComponent<BattleController>();
             SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetActiveScene());
+            rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
             gottenBC = true;
         }
 
+        hpCanvas.enabled = true;
         targetCharacters = myStatus.MySide == "Enemy" ? battleController.Homes : battleController.Enemies;
 
         // 相手陣営のキャラが0になった時に動作を止める
@@ -129,6 +138,11 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
     /// 
     public void ReLoadHp()
     {
+        // 常にHpCanvasをMain Cameraに向かせる＆HpSliderの設定
+        hpCanvas.transform.rotation = Camera.main.transform.rotation;
+        hpSlider.value = statusController.hp / myStatus.Hp;
+
+
         // 被ダメ処理与ダメ処理は各Weaponオブジェクトに
         if (damageController.isTakeDamage)
         {
@@ -138,6 +152,7 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
             if (statusController.hp <= 0)  // 死亡時
             {
                 animator.SetTrigger(dieParamHash);
+                hpSlider.value = 0;
                 this.enabled = false;
             }
         }

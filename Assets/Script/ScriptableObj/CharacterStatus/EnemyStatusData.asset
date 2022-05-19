@@ -17,10 +17,10 @@ MonoBehaviour:
     _mySide: Enemy
     _rankStr: D
     _rankInt: 1
-    _cost: 10
-    _hp: 100
-    _atk: 5
-    _atkRange: 2.4
+    _cost: 5
+    _hp: 80
+    _atk: 7
+    _atkRange: 3.5
     _atkRate: 0.6
     _spd: 3
     _gravity: 100
@@ -31,11 +31,11 @@ MonoBehaviour:
     _mySide: Enemy
     _rankStr: C
     _rankInt: 2
-    _cost: 20
-    _hp: 150
-    _atk: 5
-    _atkRange: 2.43
-    _atkRate: 0.6
+    _cost: 10
+    _hp: 140
+    _atk: 2
+    _atkRange: 3.5
+    _atkRate: 0.5
     _spd: 2
     _gravity: 100
     _prefab: {fileID: 2825804701835041037, guid: 1331ee6e33ac24e44ba00269ca65a9a2, type: 3}
@@ -45,24 +45,24 @@ MonoBehaviour:
     _mySide: Enemy
     _rankStr: B
     _rankInt: 3
-    _cost: 30
-    _hp: 130
+    _cost: 15
+    _hp: 100
     _atk: 10
-    _atkRange: 2.43
+    _atkRange: 6
     _atkRate: 0.6
-    _spd: 2
+    _spd: 4
     _gravity: 100
-    _prefab: {fileID: 5363196716613286982, guid: 70652fc1d519e4bb99fb6e7f187cc6ef, type: 3}
+    _prefab: {fileID: 4935685541201316055, guid: 70652fc1d519e4bb99fb6e7f187cc6ef, type: 3}
     _playerSprite: {fileID: 0}
     _playerLevelingData: {fileID: 0}
   - _name: Dragon
     _mySide: Enemy
     _rankStr: A
     _rankInt: 4
-    _cost: 40
+    _cost: 20
     _hp: 170
-    _atk: 50
-    _atkRange: 100
+    _atk: 30
+    _atkRange: 80
     _atkRate: 0.6
     _spd: 4
     _gravity: 100
@@ -73,11 +73,11 @@ MonoBehaviour:
     _mySide: Enemy
     _rankStr: S
     _rankInt: 5
-    _cost: 50
+    _cost: 25
     _hp: 200
-    _atk: 100
-    _atkRange: 1
-    _atkRate: 0.6
+    _atk: 70
+    _atkRange: 20
+    _atkRate: 0.3
     _spd: 2
     _gravity: 100
     _prefab: {fileID: 7347660652077248122, guid: 5e5633f834fd6409b961c3547056fe15, type: 3}

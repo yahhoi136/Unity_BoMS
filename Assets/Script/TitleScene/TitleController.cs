@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -13,6 +14,7 @@ public class TitleController : MonoBehaviour
     [SerializeField] GameObject cautionUI;
     [SerializeField] Button encycButton;
     [SerializeField] GameObject encyclopedia;
+    [SerializeField] Canvas howToUseCanvas;
     SaveData data;
     bool isDataExsist;
     bool isLoadData;
@@ -87,7 +89,7 @@ public class TitleController : MonoBehaviour
 
         if (isDataExsist && isLoadData)
         {
-            SceneManager.LoadScene("PreparationScene");
+            StartCoroutine(MoveSceneCoroutine());
         }
         else
         {
@@ -101,6 +103,16 @@ public class TitleController : MonoBehaviour
     {
         // 初めから用のデータを作る。
         SaveData.SetSaveData(0, difficultyData.DifficultyList[0].RankStr, difficultyData.DifficultyList[0].RankInt, difficultyData.DifficultyList[0].PhaseNum, 0);
+        StartCoroutine(MoveSceneCoroutine());
+    }
+
+
+    IEnumerator MoveSceneCoroutine()
+    {
+        howToUseCanvas.enabled = true;
+        // HowToUseCanvasがタップされたら次のシーンへ。(一つ前のタップが影響して誤判定されるのを防ぐために数秒待たせる)
+        yield return new WaitForSeconds(0.5f);
+        yield return new WaitUntil(() => Input.GetMouseButtonDown(0));
         SceneManager.LoadScene("PreparationScene");
     }
 
@@ -127,4 +139,8 @@ public class TitleController : MonoBehaviour
             encyclopedia.SetActive(true);
         }
     }
+
+
+
+
 }

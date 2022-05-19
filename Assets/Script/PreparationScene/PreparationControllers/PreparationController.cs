@@ -30,10 +30,8 @@ using UnityEngine.SceneManagement;
 #endregion
 
 
-
 public class PreparationController : MonoBehaviour
 {
-
     [SerializeField, NotEditable] GameObject go;
     bool _isRetried;
     public bool IsRetried { get { return _isRetried; } set { _isRetried = value; } }
@@ -56,6 +54,7 @@ public class PreparationController : MonoBehaviour
             IsRetried = true;
         }
     }
+
 
     public void battleStart()
     {
