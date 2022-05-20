@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 3254611930107037724}
   m_Layer: 12
   m_Name: Weapon:SlimeBody
-  m_TagString: Weapon
+  m_TagString: SRWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

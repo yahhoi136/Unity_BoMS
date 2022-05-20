@@ -32,6 +32,8 @@ using UnityEngine.SceneManagement;
 
 public class PreparationController : MonoBehaviour
 {
+    [SerializeField] GameObject encycBGI;
+    [SerializeField] GameObject encyclopedia;
     [SerializeField, NotEditable] GameObject go;
     bool _isRetried;
     public bool IsRetried { get { return _isRetried; } set { _isRetried = value; } }
@@ -52,6 +54,21 @@ public class PreparationController : MonoBehaviour
         {
             go = GameObject.FindGameObjectWithTag("Retried");
             IsRetried = true;
+        }
+    }
+
+
+    public void openEncyclopedia()
+    {
+        if (encyclopedia.activeInHierarchy)
+        {
+            encycBGI.SetActive(false);
+            encyclopedia.SetActive(false);
+        }
+        else
+        {
+            encycBGI.SetActive(true);
+            encyclopedia.SetActive(true);
         }
     }
 

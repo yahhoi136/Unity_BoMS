@@ -27,19 +27,19 @@ MonoBehaviour:
     _maxCost: 80
   - _rankStr: B
     _rankInt: 3
-    _phaseNum: 3
+    _phaseNum: 4
     _minRank: 2
     _maxRank: 3
     _maxCost: 120
   - _rankStr: A
     _rankInt: 4
-    _phaseNum: 3
+    _phaseNum: 5
     _minRank: 2
     _maxRank: 4
     _maxCost: 160
   - _rankStr: S
     _rankInt: 5
-    _phaseNum: 3
+    _phaseNum: 5
     _minRank: 3
     _maxRank: 5
     _maxCost: 200

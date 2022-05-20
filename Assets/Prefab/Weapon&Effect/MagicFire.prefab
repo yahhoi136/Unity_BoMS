@@ -4832,7 +4832,7 @@ GameObject:
   - component: {fileID: 70893572404230396}
   m_Layer: 0
   m_Name: MagicFire
-  m_TagString: Weapon
+  m_TagString: LRWeapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

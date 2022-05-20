@@ -8,8 +8,9 @@ TagManager:
   - Enemy
   - BattleController
   - PlayerPreparation
-  - Weapon
   - Retried
+  - SRWeapon
+  - LRWeapon
   layers:
   - Default
   - TransparentFX

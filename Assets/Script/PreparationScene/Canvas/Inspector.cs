@@ -47,13 +47,13 @@ public class Inspector : MonoBehaviour
 
         if (isCharaPicked)
         {
-            nameText.text = $"【{pickedCharaStatus.dataName}】";
+            nameText.text = $"ステータス\n【{pickedCharaStatus.dataName}】";
             otherText.text = $"HP                  {pickedCharaStatus.hp}\nATK                  {pickedCharaStatus.atk}\nATK RATE     {pickedCharaStatus.atkRate}/s\nSPEED          {pickedCharaStatus.spd}m/s";
         }
 
         if (isNeutral) 
         {
-            nameText.text = $"【{playerPreparation.PlayerName}】";
+            nameText.text = $"ステータス\n【{playerPreparation.PlayerName}】";
             otherText.text = $"HP                  {playerPreparation.PlayerHp}\nATK                  {playerPreparation.PlayerAtk}\nATK RATE     {playerPreparation.PlayerAtkRate}/s\nSPEED          {playerPreparation.PlayerSpd}m/s";
         }
     }

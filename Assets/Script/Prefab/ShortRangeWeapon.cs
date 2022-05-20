@@ -23,16 +23,12 @@ public class ShortRangeWeapon : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        // キャラの攻撃力から武器の攻撃力を設定
-        atk = myDamageController.atk;
-    }
-
-
     // 与ダメ処理。フレンドリーファイアなし。
     void OnTriggerEnter(Collider other)
     {
+        // キャラの攻撃力から武器の攻撃力を設定
+        atk = myDamageController.atk;
+
         // 相手陣営のキャラクターに当たった時
         if (other.transform.root.gameObject.CompareTag(opponentSide))
         {
