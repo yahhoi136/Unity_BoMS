@@ -75,7 +75,7 @@ MonoBehaviour:
     _rankInt: 5
     _cost: 25
     _hp: 200
-    _atk: 70
+    _atk: 40
     _atkRange: 20
     _atkRate: 0.3
     _spd: 2

@@ -46,6 +46,6 @@ MonoBehaviour:
   - _rankStr: SS
     _rankInt: 6
     _phaseNum: 0
-    _minRank: 3
+    _minRank: 1
     _maxRank: 5
     _maxCost: 240
