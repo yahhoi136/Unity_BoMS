@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
-public class AllocationButton: MonoBehaviour, ISelectHandler, IDeselectHandler
+public class AllocationButton: MonoBehaviour, ISelectHandler, IDeselectHandler, IPointerEnterHandler
 {
     [SerializeField] PlayerPreparation playerPreparation;
     [SerializeField] CharacterStatusData homeStatusData;
@@ -13,6 +13,8 @@ public class AllocationButton: MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField] AllocationDelete allocationDelete;
     [SerializeField] GameObject myPrefab;
     [SerializeField] Text costText;
+    [SerializeField] Text inspectorNameText;
+    [SerializeField] Text inspectorOtherText;
     SaveData data;
     GameObject createdPrefab;
     bool isSelected;
@@ -37,7 +39,7 @@ public class AllocationButton: MonoBehaviour, ISelectHandler, IDeselectHandler
 
     void Update()
     {
-        // ボタンが選択されている時、マウスカーソルの位置に配置キャラを追従＆コスト消費、追従させる位置はHomeTerritoryの範囲内。
+        // ボタンが選択されている時、マウスカーソルの位置に配置キャラを追従＆コスト消費、追従させる位置はHomeTerritoryの範囲内
         if (isSelected)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -73,6 +75,10 @@ public class AllocationButton: MonoBehaviour, ISelectHandler, IDeselectHandler
                 Destroy(createdPrefab);
             }
 
+
+            // またInspectorをボタン選択のキャラに。
+            inspectorNameText.text = $"ステータス\n【{homeStatusData.CharacterStatusList[characterNum].Name}】";
+            inspectorOtherText.text = $"HP                  {homeStatusData.CharacterStatusList[characterNum].Hp}\nATK                  {homeStatusData.CharacterStatusList[characterNum].Atk}\nATK RATE     {homeStatusData.CharacterStatusList[characterNum].AtkRate}/s\nSPEED          {homeStatusData.CharacterStatusList[characterNum].Spd}m/s";
         }
     }
 
@@ -100,4 +106,12 @@ public class AllocationButton: MonoBehaviour, ISelectHandler, IDeselectHandler
         allocationDelete.myButton.interactable = false;
     }
 
+
+    // ボタンの上にカーソルがきた時も、Inspectorをボタンのキャラに。
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        inspectorNameText.text = $"ステータス\n【{homeStatusData.CharacterStatusList[characterNum].Name}】";
+        inspectorOtherText.text = $"HP                  {homeStatusData.CharacterStatusList[characterNum].Hp}\nATK                  {homeStatusData.CharacterStatusList[characterNum].Atk}\nATK RATE     {homeStatusData.CharacterStatusList[characterNum].AtkRate}/s\nSPEED          {homeStatusData.CharacterStatusList[characterNum].Spd}m/s";
+
+    }
 }

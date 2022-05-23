@@ -5,13 +5,15 @@ using System.IO;
 using Newtonsoft.Json;
 
 // PlayerNum、MyStatusからのPlayerLevelingDataと各種ステータス、PlayerChangeボタンデザインの管理
-public class PlayerChange : MonoBehaviour, IPointerDownHandler
+public class PlayerChange : MonoBehaviour, IPointerDownHandler, IPointerEnterHandler
 {
     [SerializeField] CharacterStatusData playerStatusData;
     [SerializeField] PlayerPreparation playerPreparation;
     [SerializeField] Image playerImage;
     [SerializeField] Text playerName;
     [SerializeField] Image changeImage;
+    [SerializeField] Text inspectorNameText;
+    [SerializeField] Text inspectorOtherText;
     SaveData data; 
     GameObject nowPrefab;
 
@@ -78,6 +80,7 @@ public class PlayerChange : MonoBehaviour, IPointerDownHandler
         playerImage.sprite = playerPreparation.MyStatus.PlayerSprite;
         playerName.text = playerPreparation.MyStatus.Name;
 
+        reloadInspector();
     }
 
 
@@ -93,4 +96,16 @@ public class PlayerChange : MonoBehaviour, IPointerDownHandler
         nowPrefab = Instantiate(playerPreparation.MyStatus.Prefab);
     }
 
+
+    // ボタンの上にカーソルが来た時, Inspectorをプレイヤーのものに更新。
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        reloadInspector();
+    }
+
+    void reloadInspector()
+    {
+        inspectorNameText.text = $"ステータス\n【{playerPreparation.PlayerName}】";
+        inspectorOtherText.text = $"HP                  {playerPreparation.PlayerHp}\nATK                  {playerPreparation.PlayerAtk}\nATK RATE     {playerPreparation.PlayerAtkRate}/s\nSPEED          {playerPreparation.PlayerSpd}m/s";
+    }
 }

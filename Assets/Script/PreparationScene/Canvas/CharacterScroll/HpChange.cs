@@ -10,6 +10,8 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [SerializeField] Text incrementText;
     [SerializeField] GameObject myDownButton;
     [SerializeField] float disappearTime = 0.1f;
+    [SerializeField] Text inspectorNameText;
+    [SerializeField] Text inspectorOtherText;
     PlayerLeveling myLeveling;
 
 
@@ -28,12 +30,14 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     #region 説明
     // Upボタンに触れた時だけ、そのDownボタンが表示される。DownボタンはUpボタンの子オブジェなのでDownに触れてる時も表示される。
     // UpボタンからDownボタンに移動する際に一瞬隙間があるので、その部分を移動する時間だけ処理を遅らせる。
+    // またボタンに触れている時にInspectorをプレイヤーのものに更新。
     #endregion
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         myDownButton.SetActive(true);
         CancelInvoke();
+        reloadInspector();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -44,6 +48,12 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     void disappearDelete()
     {
         myDownButton.SetActive(false);
+    }
+
+    void reloadInspector()
+    {
+        inspectorNameText.text = $"ステータス\n【{playerPreparation.PlayerName}】";
+        inspectorOtherText.text = $"HP                  {playerPreparation.PlayerHp}\nATK                  {playerPreparation.PlayerAtk}\nATK RATE     {playerPreparation.PlayerAtkRate}/s\nSPEED          {playerPreparation.PlayerSpd}m/s";
     }
 
 
@@ -73,6 +83,7 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     }
 
                     playerPreparation.HpLv += 1;
+                    reloadInspector();
                     return;
                 }
             }
@@ -99,6 +110,7 @@ public class HpChange : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     costText.text = $"COST {myLeveling.Cost[i]} ";
 
                     playerPreparation.HpLv -= 1;
+                    reloadInspector();
                 }
             }
         }

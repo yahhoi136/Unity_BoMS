@@ -44,15 +44,12 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	BattleController battleController;
 	GameObject[] targetCharacters;
 	bool gottenBC = false;
-	AnimatorStateInfo state;
-	bool onceCreated = false;
 
 	int speedParamHash = Animator.StringToHash("Speed");
 	int directionParamHash = Animator.StringToHash("Direction");
 	int attackParamHash = Animator.StringToHash("AttackStart");
 	int atkRateParamHash = Animator.StringToHash("AtkRate");
 	int dieParamHash = Animator.StringToHash("IsDead");
-	int baseAttackParamHash = Animator.StringToHash("Base Layer.Attack");
 
 
 	void Start()
@@ -150,23 +147,18 @@ public class WizardPlayerController : MonoBehaviour, ICharacter, IAttackable
 	///
 	public void Attack()
 	{
-
 		// 現在ステータスの代入
 		damageController.atk = statusController.atk;
 		animator.SetFloat(atkRateParamHash, playerPreparation.PlayerAtkRate);
 
 		// 入力でアニメーション起動
 		if (CrossPlatformInputManager.GetButton("Attack")) { animator.SetTrigger(attackParamHash); }
+	}
 
-		// 一度の攻撃アニメーション中に一度だけ火の玉を生成
-		state = animator.GetCurrentAnimatorStateInfo(0);
-		if (state.fullPathHash != baseAttackParamHash) { onceCreated = false; }
-		if (state.fullPathHash == baseAttackParamHash && !onceCreated)
-		{
-			Instantiate(myFireBall, transform);
-			onceCreated = true;
-		}
-
+	// コールバックで攻撃アニメーション中に一度だけ火の玉を生成
+	public void attack()
+	{
+		Instantiate(myFireBall, transform);
 	}
 
 

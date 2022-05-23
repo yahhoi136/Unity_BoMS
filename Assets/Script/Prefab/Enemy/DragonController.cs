@@ -119,6 +119,7 @@ public class DragonController : MonoBehaviour, ICharacter, IAttackable
     /// 
     public void Attack()
     {
+        // 現在ステータスの代入
         damageController.atk = statusController.atk;
         animator.SetFloat(atkRateParamHash, statusController.atkRate);
 

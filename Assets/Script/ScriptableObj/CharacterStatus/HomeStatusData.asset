@@ -59,7 +59,7 @@ MonoBehaviour:
     _mySide: Home
     _rankStr: S
     _rankInt: 5
-    _cost: 25
+    _cost: 30
     _hp: 300
     _atk: 30
     _atkRange: 20

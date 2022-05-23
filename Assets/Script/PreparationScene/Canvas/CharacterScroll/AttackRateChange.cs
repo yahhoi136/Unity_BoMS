@@ -10,6 +10,8 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
     [SerializeField] Text incrementText;
     [SerializeField] GameObject myDownButton;
     [SerializeField] float disappearTime = 0.1f;
+    [SerializeField] Text inspectorNameText;
+    [SerializeField] Text inspectorOtherText;
     PlayerLeveling myLeveling;
 
 
@@ -29,12 +31,14 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
     #region 説明
     // Upボタンに触れた時だけ、そのDownボタンが表示される。DownボタンはUpボタンの子オブジェなのでDownに触れてる時も表示される。
     // UpボタンからDownボタンに移動する際に一瞬隙間があるので、その部分を移動する時間だけ処理を遅らせる。
+    // またボタンに触れている時にInspectorをプレイヤーのものに更新。
     #endregion
 
     public void OnPointerEnter(PointerEventData eventData)
     {
         myDownButton.SetActive(true);
         CancelInvoke();
+        reloadInspector();
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -45,6 +49,12 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
     void disappearDelete()
     {
         myDownButton.SetActive(false);
+    }
+
+    void reloadInspector()
+    {
+        inspectorNameText.text = $"ステータス\n【{playerPreparation.PlayerName}】";
+        inspectorOtherText.text = $"HP                  {playerPreparation.PlayerHp}\nATK                  {playerPreparation.PlayerAtk}\nATK RATE     {playerPreparation.PlayerAtkRate}/s\nSPEED          {playerPreparation.PlayerSpd}m/s";
     }
 
 
@@ -59,7 +69,8 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
             {
                 if (playerPreparation.AtkRateLv == i + 1)
                 {
-                    playerPreparation.PlayerAtkRate += myLeveling.Incre[i];
+                    // なぜか値が.9999999のようにバグるので四捨五入で調節。
+                    playerPreparation.PlayerAtkRate = Mathf.Round((playerPreparation.PlayerAtkRate + myLeveling.Incre[i]) * 10) / 10;
                     playerPreparation.TotalHomeCost += myLeveling.Cost[i];
 
                     if (myLeveling.MaxLv == i + 2)
@@ -74,6 +85,7 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
                     }
 
                     playerPreparation.AtkRateLv += 1;
+                    reloadInspector();
                     return;
                 }
             }
@@ -100,6 +112,7 @@ public class AttackRateChange : MonoBehaviour, IPointerEnterHandler, IPointerExi
                     costText.text = $"COST {myLeveling.Cost[i]} ";
 
                     playerPreparation.AtkRateLv -= 1;
+                    reloadInspector();
                 }
             }
         }

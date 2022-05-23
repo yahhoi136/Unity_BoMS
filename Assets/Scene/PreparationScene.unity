@@ -470,7 +470,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -1079}
+  m_AnchoredPosition: {x: 101, y: -1049}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &66471167
@@ -573,6 +573,8 @@ MonoBehaviour:
   allocationDelete: {fileID: 751798026}
   myPrefab: {fileID: 1185721472537623166, guid: 4d1aca1d57e6745ff83f9869501b05cc, type: 3}
   costText: {fileID: 335844556}
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &72200387
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +759,8 @@ MonoBehaviour:
   playerImage: {fileID: 108566701}
   playerName: {fileID: 248712903}
   changeImage: {fileID: 875581294}
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &113324020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,8 +1372,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 7, y: 0}
-  m_SizeDelta: {x: 50, y: 90}
+  m_AnchoredPosition: {x: 11, y: 0}
+  m_SizeDelta: {x: 55, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &304720303
 MonoBehaviour:
@@ -1808,7 +1812,9 @@ MonoBehaviour:
   costText: {fileID: 843092386}
   incrementText: {fileID: 293951558}
   myDownButton: {fileID: 1501389108}
-  disappearTime: 0.1
+  disappearTime: 0.15
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &357249719
 GameObject:
   m_ObjectHideFlags: 0
@@ -3922,8 +3928,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 70, y: 67}
-  m_SizeDelta: {x: 65, y: 70}
+  m_AnchoredPosition: {x: 140, y: 0}
+  m_SizeDelta: {x: 65, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &875581294
 MonoBehaviour:
@@ -4365,7 +4371,9 @@ MonoBehaviour:
   costText: {fileID: 251631744}
   incrementText: {fileID: 532869359}
   myDownButton: {fileID: 1188402428}
-  disappearTime: 0.1
+  disappearTime: 0.15
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &1039763499
 GameObject:
   m_ObjectHideFlags: 0
@@ -4451,8 +4459,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 7, y: 0}
-  m_SizeDelta: {x: 50, y: 90}
+  m_AnchoredPosition: {x: 11, y: 0}
+  m_SizeDelta: {x: 55, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1052587462
 MonoBehaviour:
@@ -5116,8 +5124,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 7, y: 0}
-  m_SizeDelta: {x: 50, y: 90}
+  m_AnchoredPosition: {x: 11, y: 0}
+  m_SizeDelta: {x: 55, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1188402430
 MonoBehaviour:
@@ -5324,7 +5332,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -781}
+  m_AnchoredPosition: {x: 101, y: -751}
   m_SizeDelta: {x: 200, y: 37}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1204918508
@@ -6096,7 +6104,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -1309}
+  m_AnchoredPosition: {x: 101, y: -1279}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1393648609
@@ -6199,6 +6207,8 @@ MonoBehaviour:
   allocationDelete: {fileID: 751798026}
   myPrefab: {fileID: 2354805300830874157, guid: 1e98254f12fc940b7bfe30cfe5293c9c, type: 3}
   costText: {fileID: 1883050664}
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &1456335847
 GameObject:
   m_ObjectHideFlags: 0
@@ -6541,8 +6551,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 7, y: 0}
-  m_SizeDelta: {x: 50, y: 90}
+  m_AnchoredPosition: {x: 11, y: 0}
+  m_SizeDelta: {x: 55, y: 90}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1501389110
 MonoBehaviour:
@@ -6870,7 +6880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -849}
+  m_AnchoredPosition: {x: 101, y: -819}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1608912678
@@ -6891,6 +6901,8 @@ MonoBehaviour:
   allocationDelete: {fileID: 751798026}
   myPrefab: {fileID: 6155350168180858534, guid: a676c6f32152d49e7bde58d31a2525a9, type: 3}
   costText: {fileID: 1943005036}
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!114 &1608912679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7090,7 +7102,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 101, y: -1539}
+  m_AnchoredPosition: {x: 101, y: -1509}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1648710380
@@ -7111,6 +7123,8 @@ MonoBehaviour:
   allocationDelete: {fileID: 751798026}
   myPrefab: {fileID: 7100590381416323856, guid: dccda746a861d482e944d84e834863a2, type: 3}
   costText: {fileID: 738589100}
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!114 &1648710381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7684,10 +7698,10 @@ RectTransform:
   m_Father: {fileID: 1943007935}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 208, y: -400}
-  m_SizeDelta: {x: 7, y: 800}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 213, y: 0}
+  m_SizeDelta: {x: 13, y: 840}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1783838472
 MonoBehaviour:
@@ -7733,7 +7747,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1904953877}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.44444448
+  m_Size: 0.4666667
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8663,7 +8677,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 257, y: 800}
+  m_SizeDelta: {x: 270, y: 840}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &1943007936
 MonoBehaviour:
@@ -9122,7 +9136,9 @@ MonoBehaviour:
   costText: {fileID: 662119429}
   incrementText: {fileID: 113324022}
   myDownButton: {fileID: 304720301}
-  disappearTime: 0.1
+  disappearTime: 0.15
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &2121563566
 GameObject:
   m_ObjectHideFlags: 0
@@ -9402,7 +9418,9 @@ MonoBehaviour:
   costText: {fileID: 29532165}
   incrementText: {fileID: 1601217104}
   myDownButton: {fileID: 1052587460}
-  disappearTime: 0.1
+  disappearTime: 0.15
+  inspectorNameText: {fileID: 1456335849}
+  inspectorOtherText: {fileID: 1235131959}
 --- !u!1 &2141368204
 GameObject:
   m_ObjectHideFlags: 0

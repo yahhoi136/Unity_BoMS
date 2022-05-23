@@ -35,7 +35,7 @@ MonoBehaviour:
     _hp: 50
     _atk: 40
     _atkRange: 0
-    _atkRate: 0.7
+    _atkRate: 0.5
     _spd: 3
     _gravity: 100
     _prefab: {fileID: 7607172035763285364, guid: 799aa1efeaca04b9a99fadddc301d825, type: 3}

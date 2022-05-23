@@ -46,7 +46,7 @@ MonoBehaviour:
     _rankStr: B
     _rankInt: 3
     _cost: 15
-    _hp: 100
+    _hp: 120
     _atk: 10
     _atkRange: 6
     _atkRate: 0.6
@@ -60,10 +60,10 @@ MonoBehaviour:
     _rankStr: A
     _rankInt: 4
     _cost: 20
-    _hp: 170
+    _hp: 100
     _atk: 30
     _atkRange: 80
-    _atkRate: 0.6
+    _atkRate: 0.5
     _spd: 4
     _gravity: 100
     _prefab: {fileID: 5947912340958152208, guid: 3e1fcacc7302844bea667a5f401ea9a0, type: 3}
@@ -73,7 +73,7 @@ MonoBehaviour:
     _mySide: Enemy
     _rankStr: S
     _rankInt: 5
-    _cost: 25
+    _cost: 30
     _hp: 200
     _atk: 40
     _atkRange: 20
